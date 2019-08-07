@@ -1,0 +1,14 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Fira+Code:300&display=swap');
+
+// Modified Bulma Variables
+$body-background-color: #313131;
+
+$family-sans-serif: 'Fira Code';
+$navbar-background-color: #313131;
+
+
+$navbar-burger-color: #FFF;
+
+// Bulma
+@import "../../../node_modules/bulma/bulma.sass";
