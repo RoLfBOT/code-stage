@@ -8,6 +8,8 @@
           class="navbar-burger"
           aria-label="menu"
           aria-expanded="false"
+          @click="toggleMenu"
+          :class="{ 'is-active': menuActive }"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -15,14 +17,18 @@
         </a>
       </div>
 
-      <div class="navbar-menu">
+      <div
+        class="navbar-menu"
+        @click="toggleMenu"
+        :class="{ 'is-active': menuActive }"
+      >
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
               <router-link to="/premium" class="button is-rounded"
                 >Premium</router-link
               >
-              <router-link to="/login" class="button is-rounded"
+              <router-link to="/auth/login" class="button is-rounded"
                 >Log In</router-link
               >
             </div>
@@ -34,7 +40,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data: function() {
+    return {
+      menuActive: false
+    };
+  },
+
+  methods: {
+    toggleMenu: function() {
+      this.menuActive = !this.menuActive;
+    }
+  }
+};
 </script>
 
 <style scoped>

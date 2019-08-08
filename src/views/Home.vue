@@ -19,7 +19,7 @@
             <div class="column is-half">
               <div class="container">
                 <figure class="image">
-                  <img src="@/assets/code-desk.svg" alt="Code Desk" />
+                  <img src="@/assets/desk.svg" alt="Code Desk" />
                 </figure>
               </div>
             </div>
