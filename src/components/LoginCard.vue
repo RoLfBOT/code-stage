@@ -53,7 +53,7 @@
 
       <div class="container">
         <div class="columns is-mobile">
-          <div class="column is-one-third has-text-left">
+          <div class="column is-one-third has-text-right">
             <span class="icon is-size-1 has-text-white">
               <i class="fa fa-google" aria-hidden="true"></i>
             </span>
@@ -65,7 +65,7 @@
             </span>
           </div>
 
-          <div class="column is-one-third has-text-right">
+          <div class="column is-one-third has-text-left">
             <span class="icon is-size-1 has-text-white">
               <i class="fa fa-github-square" aria-hidden="true"></i>
             </span>

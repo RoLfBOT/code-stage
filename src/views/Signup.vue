@@ -3,8 +3,8 @@
     <div class="hero-body">
       <div class="container">
         <div class="columns is-vcentered">
-          <div class="column is-one-third is-offset-one-third">
-            <LoginCard></LoginCard>
+          <div class="column is-8 is-offset-2">
+            <SignupCard></SignupCard>
           </div>
         </div>
       </div>
@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import LoginCard from "@/components/LoginCard.vue";
+import SignupCard from "@/components/SignupCard.vue";
 
 export default {
-  name: "login",
+  name: "signup",
   components: {
-    LoginCard
+    SignupCard
   }
 };
 </script>
