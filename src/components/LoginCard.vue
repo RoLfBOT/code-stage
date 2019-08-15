@@ -7,7 +7,7 @@
         <div class="control">
           <input type="text" class="input" placeholder="Username" />
         </div>
-        <p class="help">This username is not available</p>
+        <p class="help is-danger">This username is not available</p>
       </div>
 
       <div class="field is-horizontal">
@@ -22,7 +22,7 @@
                 />
               </p>
               <p class="control">
-                <a class="button" @click="togglePasswordVisibility">
+                <a class="button is-primary" @click="togglePasswordVisibility">
                   <span class="icon">
                     <i
                       class="fa"
@@ -35,14 +35,16 @@
                 </a>
               </p>
             </div>
-            <p class="help">Password is incorrect</p>
+            <p class="help is-danger">Password is incorrect</p>
           </div>
         </div>
       </div>
 
       <div class="field">
         <p class="control">
-          <button class="button is-fullwidth is-rounded">Login</button>
+          <button class="button is-fullwidth is-rounded is-primary">
+            Login
+          </button>
           <router-link class="help" to="/auth/reset"
             >Forgot Password?</router-link
           >
@@ -109,24 +111,22 @@ export default {
 </script>
 
 <style scoped>
-.button {
-  background-color: #0bfdd1;
-  color: #000;
-  border-color: transparent;
+.title {
+  color: rgba(255, 255, 255, 0.87);
 }
 
 .divider {
   display: block;
   position: relative;
-  border-top: 0.1rem solid #0bfdd1;
+  border-top: 0.1rem solid #66d8cd;
   height: 0.1rem;
   margin: 2rem 0;
   text-align: center;
 }
 
 .divider[data-content]::after {
-  background: #353535;
-  color: #fff;
+  background: #191919;
+  color: rgba(255, 255, 255, 0.87);
   content: attr(data-content);
   display: inline-block;
   font-size: 0.75rem;
@@ -138,18 +138,14 @@ export default {
 }
 
 .card {
-  background-color: #353535;
+  background-color: #191919;
   border-radius: 20px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.title {
-  color: #fff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
 .input {
-  background-color: #454545;
-  color: #fff;
+  background-color: #252525;
+  color: rgba(255, 255, 255, 0.87);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-color: transparent;
 }
@@ -168,10 +164,10 @@ export default {
 }
 
 .footer-line {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 a {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.6);
 }
 </style>

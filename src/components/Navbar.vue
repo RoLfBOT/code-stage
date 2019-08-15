@@ -58,18 +58,18 @@ export default {
 <style scoped>
 .button {
   background-color: transparent;
-  color: #0bfdd1;
+  color: #66d8cd;
   border-color: transparent;
 }
 
 .button:hover,
 .button.is-hovered {
-  background-color: #0bfdd1;
+  background-color: #66d8cd;
   color: #000;
   border-color: transparent;
 }
 
 a:hover {
-  color: #0bfdd1;
+  color: #66d8cd;
 }
 </style>

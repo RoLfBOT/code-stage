@@ -20,6 +20,17 @@ export default new Router({
       path: "/register",
       name: "signup",
       component: () => import("./views/Signup.vue")
+    },
+    {
+      name: "playground",
+      path: "/user",
+      children: [
+        {
+          path: "playground",
+          component: () => import("./views/Playground.vue")
+        }
+      ],
+      component: () => import("./views/BaseLayout.vue")
     }
   ]
 });

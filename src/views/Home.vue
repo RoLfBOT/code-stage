@@ -6,12 +6,12 @@
         <div class="container">
           <div class="columns is-vcentered">
             <div class="column is-half has-text-centered-mobile">
-              <p class="title">CodeSmash</p>
-              <p class="subtitle">
+              <p class="title has-text-primary">CodeSmash</p>
+              <p class="subtitle has-text-white">
                 CodeSmash is the modern programming experience for educators and
                 competitive coders.
               </p>
-              <router-link class="button is-rounded" to="/register"
+              <router-link class="button is-rounded is-primary" to="/register"
                 >Create Account</router-link
               >
             </div>
@@ -42,20 +42,6 @@ export default {
 </script>
 
 <style scoped>
-.title {
-  color: #0bfdd1;
-}
-
-.subtitle {
-  color: #fff;
-}
-
-.button {
-  background-color: #0bfdd1;
-  color: #000;
-  border-color: transparent;
-}
-
 img {
   max-width: 450px;
   max-height: 450px;

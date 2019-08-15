@@ -2,13 +2,26 @@
 @import url('https://fonts.googleapis.com/css?family=Fira+Code:300&display=swap');
 
 // Modified Bulma Variables
-$body-background-color: #313131;
+$primary: #66d8cd;
+$danger: #cf6679;
+$primary-invert: #000;
+$info: #bb86fc;
+$info-invert: #000;
+
+$body-background-color: #151515;
 
 $family-sans-serif: 'Fira Code';
-$navbar-background-color: #313131;
+$navbar-background-color: #151515;
 
 
 $navbar-burger-color: #FFF;
+
+$menu-item-color: rgba(255, 255, 255, 0.87);
+$menu-item-hover-color: rgba(255, 255, 255, 0.87);
+$menu-item-hover-background-color: #313131;
+$menu-item-active-color: #000;
+$menu-item-active-background-color: #bb86fc;
+$menu-list-line-height: 1.5;
 
 // Bulma
 @import "../../../node_modules/bulma/bulma.sass";
