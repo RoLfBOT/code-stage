@@ -1,4 +1,4 @@
-export const ToggleInstance = {
+export const toggleInstance = {
   data: function() {
     return {
       showComponent: false

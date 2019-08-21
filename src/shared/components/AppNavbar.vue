@@ -20,16 +20,16 @@
       <div class="navbar-menu" :class="{ 'is-active': showComponent }">
         <div class="navbar-end">
           <div class="navbar-item">
-            <div class="buttons">
-              <router-link to="/premium" class="button is-rounded"
-                >Premium</router-link
+            <router-link to="/premium" class="button is-rounded"
+              >Premium</router-link
+            >
+          </div>
+          <div class="navbar-item">
+            <slot name="navbar-end-item">
+              <router-link to="/login" class="button is-rounded"
+                >Log In</router-link
               >
-              <slot name="navbar-end-item">
-                <router-link to="/login" class="button is-rounded"
-                  >Log In</router-link
-                >
-              </slot>
-            </div>
+            </slot>
           </div>
         </div>
       </div>
@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import { ToggleInstance } from "@/shared/mixins/ToggleInstance";
+import { toggleInstance } from "@/shared/mixins/toggleInstance";
 
 export default {
-  mixins: [ToggleInstance]
+  mixins: [toggleInstance]
 };
 </script>
 

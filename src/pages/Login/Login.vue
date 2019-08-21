@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import AppHero from "@/shared/components/AppHero.vue";
+import AppHero from "@/shared/layout/AppHero.vue";
 import LoginCard from "./components/LoginCard.vue";
 
 export default {

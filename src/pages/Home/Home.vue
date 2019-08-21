@@ -29,7 +29,7 @@
 
 <script>
 import AppNavbar from "@/shared/components/AppNavbar.vue";
-import AppHero from "@/shared/components/AppHero.vue";
+import AppHero from "@/shared/layout/AppHero.vue";
 
 export default {
   name: "Home",
