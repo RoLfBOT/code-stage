@@ -27,8 +27,8 @@
                     <i
                       class="fa"
                       :class="{
-                        'fa-eye': !showPassword,
-                        'fa-eye-slash': showPassword
+                        'fa-eye': showPassword,
+                        'fa-eye-slash': !showPassword
                       }"
                     ></i>
                   </span>
@@ -89,7 +89,7 @@
 
 <script>
 export default {
-  name: "logincard",
+  name: "login-card",
   data: function() {
     return {
       showPassword: false,

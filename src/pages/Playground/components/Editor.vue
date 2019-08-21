@@ -18,11 +18,16 @@ export default {
     this.editor = Ace.edit("editor", {
       mode: "ace/mode/c_cpp",
       theme: "ace/theme/monokai",
-      fontSize: 16,
-      maxLines: 25,
-      minLines: 25
+      fontSize: 16
     });
     this.editor.setValue("#include<iostream>\nusing namespace std;", 1);
   }
 };
 </script>
+
+<style scoped>
+#editor {
+  min-height: 65vh;
+  height: 100%;
+}
+</style>

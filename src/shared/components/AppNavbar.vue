@@ -8,8 +8,8 @@
           class="navbar-burger"
           aria-label="menu"
           aria-expanded="false"
-          @click="toggleMenu"
-          :class="{ 'is-active': menuActive }"
+          @click="toggleComponent"
+          :class="{ 'is-active': showComponent }"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -17,20 +17,18 @@
         </a>
       </div>
 
-      <div
-        class="navbar-menu"
-        @click="toggleMenu"
-        :class="{ 'is-active': menuActive }"
-      >
+      <div class="navbar-menu" :class="{ 'is-active': showComponent }">
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
               <router-link to="/premium" class="button is-rounded"
                 >Premium</router-link
               >
-              <router-link to="/auth/login" class="button is-rounded"
-                >Log In</router-link
-              >
+              <slot name="navbar-end-item">
+                <router-link to="/login" class="button is-rounded"
+                  >Log In</router-link
+                >
+              </slot>
             </div>
           </div>
         </div>
@@ -40,18 +38,10 @@
 </template>
 
 <script>
-export default {
-  data: function() {
-    return {
-      menuActive: false
-    };
-  },
+import { ToggleInstance } from "@/shared/mixins/ToggleInstance";
 
-  methods: {
-    toggleMenu: function() {
-      this.menuActive = !this.menuActive;
-    }
-  }
+export default {
+  mixins: [ToggleInstance]
 };
 </script>
 

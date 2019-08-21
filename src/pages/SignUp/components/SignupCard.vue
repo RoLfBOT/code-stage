@@ -74,13 +74,19 @@
         <div class="column has-text-centered">
           <p class="content footer-line">
             Already have an account?
-            <router-link to="/auth/login"><strong>Login</strong></router-link>
+            <router-link to="/login"><strong>Login</strong></router-link>
           </p>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: "signup-card"
+};
+</script>
 
 <style scoped>
 option {
