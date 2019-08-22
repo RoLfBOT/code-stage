@@ -5,9 +5,10 @@ import Router from "vue-router";
 import HomeRoutes from "./pages/Home/routes/routes.home";
 import LoginRoutes from "./pages/Login/routes/routes.login";
 import SignupRoutes from "./pages/SignUp/routes/routes.signup";
+import PlaygroundRoutes from "./pages/Playground/routes/routes.playground";
 
 Vue.use(Router);
 
 export default new Router({
-  routes: [...HomeRoutes, ...LoginRoutes, ...SignupRoutes]
+  routes: [...HomeRoutes, ...LoginRoutes, ...SignupRoutes, ...PlaygroundRoutes]
 });
