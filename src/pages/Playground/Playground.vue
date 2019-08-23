@@ -7,6 +7,9 @@
             <div class="column is-7">
               <v-editor-card></v-editor-card>
             </div>
+            <div class="column is-5">
+              <v-output-card></v-output-card>
+            </div>
           </div>
         </div>
       </main>
@@ -21,13 +24,15 @@
 import AppBaseLayout from "@/shared/layout/AppBaseLayout.vue";
 import AppFooter from "@/shared/components/AppFooter.vue";
 import EditorCard from "./components/EditorCard";
+import OutputCard from "./components/OutputCard";
 
 export default {
   name: "playground-page",
   components: {
     "v-base-layout": AppBaseLayout,
     "v-footer": AppFooter,
-    "v-editor-card": EditorCard
+    "v-editor-card": EditorCard,
+    "v-output-card": OutputCard
   }
 };
 </script>
