@@ -4,7 +4,10 @@
       <p class="card-header-title">
         Output
       </p>
-      <div class="card-header-icon">
+      <div
+        class="card-header-icon tooltip is-tooltip-bottom is-tooltip-left-mobile"
+        data-tooltip="Copy"
+      >
         <span class="card-header-icon icon">
           <i class="fa fa-clipboard"></i>
         </span>

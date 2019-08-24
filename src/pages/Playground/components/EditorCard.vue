@@ -7,7 +7,11 @@
             ><i class="fa fa-pencil"></i
           ></span>
         </p>
-        <div class="card-header-icon" @click="show">
+        <div
+          class="card-header-icon tooltip is-tooltip-bottom is-tooltip-left-mobile"
+          data-tooltip="Editor Settings"
+          @click="show"
+        >
           <span class="card-header-icon icon">
             <i class="fa fa-cog"></i>
           </span>
@@ -33,7 +37,7 @@
     </div>
     <v-settings
       :class="{ 'is-active': showSettings }"
-      @close-modal="showSettings = false"
+      @close-modal="closeSettings"
     ></v-settings>
   </div>
 </template>
@@ -44,19 +48,38 @@ import EditorSettingsModal from "./EditorSettingsModal";
 
 export default {
   name: "editor-card",
+
   components: {
     "v-editor": AppEditor,
     "v-settings": EditorSettingsModal
   },
-  methods: {
-    show: function() {
-      this.showSettings = true;
-    }
-  },
+
   data: function() {
     return {
       showSettings: false
     };
+  },
+
+  methods: {
+    show: function() {
+      let html = document.documentElement;
+      html.classList.add("is-clipped");
+      document.addEventListener("keydown", this.escHandler);
+      this.showSettings = true;
+    },
+
+    closeSettings: function() {
+      let html = document.documentElement;
+      html.classList.remove("is-clipped");
+      document.removeEventListener("keydown", this.escHandler);
+      this.showSettings = false;
+    },
+
+    escHandler: function(e) {
+      if (e.key === "Escape") {
+        this.closeSettings();
+      }
+    }
   }
 };
 </script>
