@@ -11,6 +11,11 @@
               <v-output-card></v-output-card>
             </div>
           </div>
+          <div class="columns">
+            <div class="column is-fullwidth">
+              <v-stdin-card></v-stdin-card>
+            </div>
+          </div>
         </div>
       </main>
     </template>
@@ -25,6 +30,7 @@ import AppBaseLayout from "@/shared/layout/AppBaseLayout.vue";
 import AppFooter from "@/shared/components/AppFooter.vue";
 import EditorCard from "./components/EditorCard";
 import OutputCard from "./components/OutputCard";
+import StdinCard from "./components/StdinCard";
 
 export default {
   name: "playground-page",
@@ -32,42 +38,10 @@ export default {
     "v-base-layout": AppBaseLayout,
     "v-footer": AppFooter,
     "v-editor-card": EditorCard,
-    "v-output-card": OutputCard
+    "v-output-card": OutputCard,
+    "v-stdin-card": StdinCard
   }
 };
 </script>
 
-<style scoped>
-.card-footer-item:first-child {
-  justify-content: left;
-}
-
-.card-footer-item:last-child {
-  justify-content: right;
-}
-
-.card-footer-item:only-child {
-  justify-content: left;
-}
-
-.card-footer-item:not(:last-child) {
-  border-right: none;
-}
-
-option {
-  background-color: #bb86fc;
-  color: #000;
-  border-color: transparent;
-}
-
-select {
-  background-color: #bb86fc;
-  border-color: transparent;
-  color: #000;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.editor-container {
-  padding: 0;
-}
-</style>
+<style scoped></style>

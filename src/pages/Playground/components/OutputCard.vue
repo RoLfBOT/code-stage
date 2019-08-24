@@ -10,7 +10,7 @@
         </span>
       </div>
     </header>
-    <div class="card-content output-container card-content-equal-height">
+    <div class="card-content output-container">
       <pre class="output-text">Hello World</pre>
     </div>
     <footer class="card-footer">
@@ -41,7 +41,7 @@
 .card-header {
   color: rgba(255, 255, 255, 0.87);
   box-shadow: 0px 5px 6px 0px rgba(0, 0, 0, 0.8);
-  z-index: -1;
+  z-index: 5;
 }
 
 .card-footer {
