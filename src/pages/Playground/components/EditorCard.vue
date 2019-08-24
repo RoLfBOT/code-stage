@@ -1,44 +1,62 @@
 <template>
-  <div class="card">
-    <header class="card-header">
-      <p class="card-header-title">
-        Untitled&nbsp;<span class="icon edit-title"
-          ><i class="fa fa-pencil"></i
-        ></span>
-      </p>
-      <div class="card-header-icon">
-        <span class="card-header-icon icon">
-          <i class="fa fa-cog"></i>
-        </span>
-      </div>
-    </header>
-    <div class="card-content editor-container">
-      <v-editor></v-editor>
-    </div>
-    <footer class="card-footer">
-      <div class="card-footer-item">
-        <div class="buttons">
-          <button class="button is-primary is-rounded">
-            <span class="icon"><i class="fa fa-play"></i></span>
-            <span>Run Code</span>
-          </button>
-          <button class="button is-info is-rounded">
-            <span class="icon"><i class="fa fa-floppy-o"></i></span>
-            <span>Save</span>
-          </button>
+  <div>
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Untitled&nbsp;<span class="icon edit-title"
+            ><i class="fa fa-pencil"></i
+          ></span>
+        </p>
+        <div class="card-header-icon" @click="show">
+          <span class="card-header-icon icon">
+            <i class="fa fa-cog"></i>
+          </span>
         </div>
+      </header>
+      <div class="card-content editor-container">
+        <v-editor></v-editor>
       </div>
-    </footer>
+      <footer class="card-footer">
+        <div class="card-footer-item">
+          <div class="buttons">
+            <button class="button is-primary is-rounded">
+              <span class="icon"><i class="fa fa-play"></i></span>
+              <span>Run Code</span>
+            </button>
+            <button class="button is-info is-rounded">
+              <span class="icon"><i class="fa fa-floppy-o"></i></span>
+              <span>Save</span>
+            </button>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <v-settings
+      :class="{ 'is-active': showSettings }"
+      @close-modal="showSettings = false"
+    ></v-settings>
   </div>
 </template>
 
 <script>
 import AppEditor from "@/shared/components/AppEditor";
+import EditorSettingsModal from "./EditorSettingsModal";
 
 export default {
   name: "editor-card",
   components: {
-    "v-editor": AppEditor
+    "v-editor": AppEditor,
+    "v-settings": EditorSettingsModal
+  },
+  methods: {
+    show: function() {
+      this.showSettings = true;
+    }
+  },
+  data: function() {
+    return {
+      showSettings: false
+    };
   }
 };
 </script>
