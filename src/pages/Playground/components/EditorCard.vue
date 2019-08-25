@@ -2,9 +2,22 @@
   <div>
     <div class="card">
       <header class="card-header">
-        <p class="card-header-title">
-          Untitled&nbsp;<span class="icon edit-title"
+        <p class="card-header-title" v-if="!editTitle">
+          {{ editorTitle }}&nbsp;<span
+            class="icon edit-title"
+            @click="editTitle = true"
             ><i class="fa fa-pencil"></i
+          ></span>
+        </p>
+        <p class="card-header-title" v-if="editTitle">
+          <input
+            class="input"
+            type="text"
+            v-model="editorTitle"
+            maxlength="20"
+          />
+          &nbsp;<span class="icon edit-title" @click="editTitle = false"
+            ><i class="fa fa-floppy-o"></i
           ></span>
         </p>
         <div
@@ -56,7 +69,9 @@ export default {
 
   data: function() {
     return {
-      showSettings: false
+      showSettings: false,
+      editTitle: false,
+      editorTitle: "Untitled"
     };
   },
 
@@ -103,6 +118,24 @@ export default {
 .card-header,
 .card-header-title {
   color: rgba(255, 255, 255, 0.87);
+}
+
+input,
+input:focus {
+  outline: none;
+  -webkit-appearance: none;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid #2f2f2f;
+  max-width: 50%;
+  color: rgba(255, 255, 255, 255);
 }
 
 .card-footer {
