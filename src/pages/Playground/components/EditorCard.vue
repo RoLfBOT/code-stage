@@ -15,6 +15,7 @@
             type="text"
             v-model="editorTitle"
             maxlength="20"
+            @keydown.enter="editTitle = false"
           />
           &nbsp;<span class="icon edit-title" @click="editTitle = false"
             ><i class="fa fa-floppy-o"></i
