@@ -20,8 +20,8 @@
             <select name="user-role" id="" required>
               <option value="" disabled selected>Role</option>
               <option value="student">Student</option>
-              <option value="student">Mentor</option>
-              <option value="student">Organisation</option>
+              <option value="mentor">Mentor</option>
+              <option value="organisation">Organisation</option>
             </select>
           </div>
         </div>
