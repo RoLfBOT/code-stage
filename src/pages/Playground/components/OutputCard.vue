@@ -7,6 +7,8 @@
       <div
         class="card-header-icon tooltip is-tooltip-bottom is-tooltip-left-mobile"
         data-tooltip="Copy"
+        v-clipboard:copy="outputText"
+        v-clipboard:success="onCopy"
       >
         <span class="card-header-icon icon">
           <i class="fa fa-clipboard"></i>
@@ -14,12 +16,12 @@
       </div>
     </header>
     <div class="card-content output-container">
-      <pre class="output-text">Hello World</pre>
+      <pre class="output-text">{{ outputText }}</pre>
     </div>
     <footer class="card-footer">
       <div class="card-footer-item">
         <div class="buttons">
-          <button class="button is-primary is-rounded">
+          <button class="button is-primary is-rounded" @click="outputText = ''">
             <span class="icon"><i class="fa fa-trash-o"></i></span>
             <span>Clear Output</span>
           </button>
@@ -28,6 +30,20 @@
     </footer>
   </div>
 </template>
+
+<script>
+import { copyHandlers } from "@/shared/mixins/copyHandlers";
+
+export default {
+  name: "output-card",
+  mixins: [copyHandlers],
+  data: function() {
+    return {
+      outputText: "Hello"
+    };
+  }
+};
+</script>
 
 <style scoped>
 .card {
