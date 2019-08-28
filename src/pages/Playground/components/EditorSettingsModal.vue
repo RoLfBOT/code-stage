@@ -21,10 +21,12 @@
           <div class="column">
             <div class="select is-pulled-right is-fullwidth">
               <select v-model="selectMode">
-                <option value="c_cpp">c/c++</option>
-                <option value="java">java</option>
-                <option value="python">python</option>
-                <option value="javascript">javascript</option>
+                <option
+                  v-for="mode in modes"
+                  :value="mode.modeName"
+                  :key="mode.modeName"
+                  >{{ mode.modeText }}</option
+                >
               </select>
             </div>
           </div>
@@ -40,10 +42,12 @@
           <div class="column">
             <div class="select is-pulled-right is-fullwidth">
               <select v-model="selectTheme">
-                <option value="monokai">monokai</option>
-                <option value="xcode">xcode</option>
-                <option value="github">github</option>
-                <option value="textmate">textmate</option>
+                <option
+                  v-for="theme in themes"
+                  :value="theme.themeName"
+                  :key="theme.themeName"
+                  >{{ theme.themeText }}</option
+                >
               </select>
             </div>
           </div>
@@ -57,9 +61,12 @@
           <div class="column">
             <div class="select is-pulled-right is-fullwidth">
               <select v-model="selectFontSize">
-                <option value="12">12px</option>
-                <option value="14">14px</option>
-                <option value="16">16px</option>
+                <option
+                  v-for="(fontSize, index) in fontSizes"
+                  :value="fontSize"
+                  :key="index"
+                  >{{ fontSize + "px" }}</option
+                >
               </select>
             </div>
           </div>
@@ -75,9 +82,12 @@
           <div class="column">
             <div class="select is-pulled-right is-fullwidth">
               <select v-model="selectTabs">
-                <option value="2">2</option>
-                <option value="4">4</option>
-                <option value="8">8</option>
+                <option
+                  v-for="(tabSize, index) in tabSizes"
+                  :value="tabSize"
+                  :key="index"
+                  >{{ tabSize }}</option
+                >
               </select>
             </div>
           </div>
@@ -90,6 +100,12 @@
 
 <script>
 import { mapMutations } from "vuex";
+import {
+  Themes,
+  Modes,
+  FontSizes,
+  TabSizes
+} from "../../../utils/appConstants";
 
 export default {
   name: "editor-settings-modal",
@@ -98,7 +114,11 @@ export default {
       selectMode: "c_cpp",
       selectTheme: "monokai",
       selectFontSize: 16,
-      selectTabs: 4
+      selectTabs: 4,
+      themes: Themes,
+      modes: Modes,
+      fontSizes: FontSizes,
+      tabSizes: TabSizes
     };
   },
 
