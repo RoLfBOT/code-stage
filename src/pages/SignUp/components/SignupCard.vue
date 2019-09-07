@@ -52,19 +52,18 @@
           </p>
           <p class="help is-danger">The password doesn't meet requirements</p>
         </div>
-      </form>
 
-      <div class="field">
-        <p class="control">
-          <button
-            class="button is-rounded is-fullwidth is-primary"
-            type="submit"
-            @click="register"
-          >
-            Sign Up
-          </button>
-        </p>
-      </div>
+        <div class="field">
+          <p class="control">
+            <button
+              class="button is-rounded is-fullwidth is-primary"
+              type="submit"
+            >
+              Sign Up
+            </button>
+          </p>
+        </div>
+      </form>
 
       <div class="divider" data-content="Sign Up With"></div>
 

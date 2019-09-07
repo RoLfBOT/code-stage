@@ -11,7 +11,7 @@
       </span>
     </a>
     <div class="navbar-dropdown is-right is-boxed">
-      <p class="navbar-item">Signed in as Kaustabh</p>
+      <p class="navbar-item">Signed in as {{ loggedInAs }}</p>
       <hr class="navbar-divider" />
       <button class="navbar-item button">Sign Out</button>
     </div>
@@ -24,6 +24,11 @@ import { clickOutside } from "@/shared/directives/clickOutside";
 
 export default {
   mixins: [toggleInstance],
+  data: function() {
+    return {
+      loggedInAs: this.$store.getters["user/NAME"].split(" ")[0]
+    };
+  },
   methods: {
     closeDropdown: function() {
       this.showComponent = false;

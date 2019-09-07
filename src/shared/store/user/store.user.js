@@ -12,6 +12,9 @@ export default {
   getters: {
     AUTHSTATUS: state => {
       return state.isLoggedIn;
+    },
+    NAME: state => {
+      return state.user ? state.user.name : "";
     }
   },
 

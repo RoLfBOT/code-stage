@@ -11,6 +11,7 @@
               class="input"
               placeholder="email"
               v-model="email"
+              required
             />
           </div>
           <p class="help is-danger">This username is not available</p>
@@ -26,6 +27,7 @@
                     :type="passwordType"
                     placeholder="Password"
                     v-model="password"
+                    required
                   />
                 </p>
                 <p class="control">
@@ -49,21 +51,21 @@
             </div>
           </div>
         </div>
-      </form>
 
-      <div class="field">
-        <p class="control">
-          <button
-            class="button is-fullwidth is-rounded is-primary"
-            @click="login"
-          >
-            Login
-          </button>
-          <router-link class="help" to="/auth/reset"
-            >Forgot Password?</router-link
-          >
-        </p>
-      </div>
+        <div class="field">
+          <p class="control">
+            <button
+              class="button is-fullwidth is-rounded is-primary"
+              type="submit"
+            >
+              Login
+            </button>
+            <router-link class="help" to="/auth/reset"
+              >Forgot Password?</router-link
+            >
+          </p>
+        </div>
+      </form>
 
       <div class="divider" data-content="Connect With"></div>
 
