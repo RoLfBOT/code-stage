@@ -7,6 +7,9 @@
       <div
         class="card-header-icon tooltip is-tooltip-bottom is-tooltip-left-mobile"
         data-tooltip="Copy"
+        v-clipboard:copy="stdin"
+        v-clipboard:success="onCopy"
+        v-clipboard:error="onError"
       >
         <span class="card-header-icon icon">
           <i class="fa fa-clipboard"></i>
@@ -18,10 +21,25 @@
         class="textarea is-black"
         rows="5"
         placeholder="Standard Input"
+        v-model="stdin"
       ></textarea>
     </div>
   </div>
 </template>
+
+<script>
+import { copyHandlers } from "@/shared/mixins/copyHandlers";
+
+export default {
+  name: "stdin-card",
+  mixins: [copyHandlers],
+  data: function() {
+    return {
+      stdin: ""
+    };
+  }
+};
+</script>
 
 <style scoped>
 .card {

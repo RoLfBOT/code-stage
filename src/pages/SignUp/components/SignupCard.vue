@@ -2,44 +2,64 @@
   <div class="card">
     <div class="card-content">
       <p class="title has-text-centered is-size-1">Sign Up</p>
-      <div class="field">
-        <p class="control is-expanded">
-          <input type="text" class="input" placeholder="Name" required />
-        </p>
-        <p class="help is-danger">This field is required</p>
-      </div>
-      <div class="field">
-        <p class="control is-expanded">
-          <input type="email" class="input" placeholder="Email" required />
-        </p>
-        <p class="help is-danger">The value is not a valid email</p>
-      </div>
-      <div class="field">
-        <div class="control is-expanded">
-          <div class="select is-fullwidth">
-            <select name="user-role" id="" required>
-              <option value="" disabled selected>Role</option>
-              <option value="student">Student</option>
-              <option value="mentor">Mentor</option>
-              <option value="organisation">Organisation</option>
-            </select>
-          </div>
+      <form @submit.prevent="register">
+        <div class="field">
+          <p class="control is-expanded">
+            <input
+              type="text"
+              class="input"
+              placeholder="Name"
+              required
+              v-model="name"
+            />
+          </p>
+          <p class="help is-danger">This field is required</p>
         </div>
-        <p class="help is-danger">Required</p>
-      </div>
+        <div class="field">
+          <p class="control is-expanded">
+            <input
+              type="email"
+              class="input"
+              placeholder="Email"
+              required
+              v-model="email"
+            />
+          </p>
+          <p class="help is-danger">The value is not a valid email</p>
+        </div>
+        <div class="field">
+          <div class="control is-expanded">
+            <div class="select is-fullwidth">
+              <select name="user-role" id="" required v-model="role">
+                <option value="" disabled selected>Role</option>
+                <option value="student">Student</option>
+                <option value="mentor">Mentor</option>
+                <option value="organisation">Organisation</option>
+              </select>
+            </div>
+          </div>
+          <p class="help is-danger">Required</p>
+        </div>
 
-      <div class="field">
-        <p class="control is-expanded">
-          <input type="password" class="input" placeholder="Password" />
-        </p>
-        <p class="help is-danger">The password doesn't meet requirements</p>
-      </div>
+        <div class="field">
+          <p class="control is-expanded">
+            <input
+              type="password"
+              class="input"
+              placeholder="Password"
+              v-model="password"
+            />
+          </p>
+          <p class="help is-danger">The password doesn't meet requirements</p>
+        </div>
+      </form>
 
       <div class="field">
         <p class="control">
           <button
             class="button is-rounded is-fullwidth is-primary"
             type="submit"
+            @click="register"
           >
             Sign Up
           </button>
@@ -84,7 +104,33 @@
 
 <script>
 export default {
-  name: "signup-card"
+  name: "signup-card",
+  data: function() {
+    return {
+      name: "",
+      email: "",
+      role: "",
+      password: ""
+    };
+  },
+  methods: {
+    register: function() {
+      const data = {
+        name: this.name,
+        email: this.email,
+        role: this.role,
+        password: this.password
+      };
+      this.$store
+        .dispatch("user/REGISTER", data)
+        .then(() => {
+          this.$router.push("/playground");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
 };
 </script>
 

@@ -9,6 +9,7 @@
         data-tooltip="Copy"
         v-clipboard:copy="outputText"
         v-clipboard:success="onCopy"
+        v-clipboard:error="onError"
       >
         <span class="card-header-icon icon">
           <i class="fa fa-clipboard"></i>

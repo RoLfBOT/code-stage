@@ -3,46 +3,60 @@
     <div class="card-content">
       <p class="title has-text-centered is-size-1">Login</p>
 
-      <div class="field">
-        <div class="control">
-          <input type="text" class="input" placeholder="Username" />
+      <form @submit.prevent="login">
+        <div class="field">
+          <div class="control">
+            <input
+              type="text"
+              class="input"
+              placeholder="email"
+              v-model="email"
+            />
+          </div>
+          <p class="help is-danger">This username is not available</p>
         </div>
-        <p class="help is-danger">This username is not available</p>
-      </div>
 
-      <div class="field is-horizontal">
-        <div class="field-body">
-          <div class="field is-expanded">
-            <div class="field has-addons">
-              <p class="control is-expanded">
-                <input
-                  class="input"
-                  :type="passwordType"
-                  placeholder="Password"
-                />
-              </p>
-              <p class="control">
-                <a class="button is-primary" @click="togglePasswordVisibility">
-                  <span class="icon">
-                    <i
-                      class="fa"
-                      :class="{
-                        'fa-eye': showPassword,
-                        'fa-eye-slash': !showPassword
-                      }"
-                    ></i>
-                  </span>
-                </a>
-              </p>
+        <div class="field is-horizontal">
+          <div class="field-body">
+            <div class="field is-expanded">
+              <div class="field has-addons">
+                <p class="control is-expanded">
+                  <input
+                    class="input"
+                    :type="passwordType"
+                    placeholder="Password"
+                    v-model="password"
+                  />
+                </p>
+                <p class="control">
+                  <a
+                    class="button is-primary"
+                    @click="togglePasswordVisibility"
+                  >
+                    <span class="icon">
+                      <i
+                        class="fa"
+                        :class="{
+                          'fa-eye': showPassword,
+                          'fa-eye-slash': !showPassword
+                        }"
+                      ></i>
+                    </span>
+                  </a>
+                </p>
+              </div>
+              <p class="help is-danger">Password is incorrect</p>
             </div>
-            <p class="help is-danger">Password is incorrect</p>
           </div>
         </div>
-      </div>
+      </form>
 
       <div class="field">
         <p class="control">
-          <button class="button is-fullwidth is-rounded is-primary">
+          <button
+            class="button is-fullwidth is-rounded is-primary"
+            @click="login"
+          >
             Login
           </button>
           <router-link class="help" to="/auth/reset"
@@ -93,7 +107,9 @@ export default {
   data: function() {
     return {
       showPassword: false,
-      passwordType: "password"
+      passwordType: "password",
+      email: "",
+      password: ""
     };
   },
   methods: {
@@ -105,6 +121,16 @@ export default {
         this.passwordType = "password";
         this.showPassword = false;
       }
+    },
+    login: function() {
+      this.$store
+        .dispatch("user/LOGIN", { email: this.email, password: this.password })
+        .then(() => {
+          this.$router.push({ path: "/playground" });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
