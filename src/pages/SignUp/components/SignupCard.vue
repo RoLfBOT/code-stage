@@ -9,11 +9,12 @@
               type="text"
               class="input"
               placeholder="Name"
-              required
-              v-model="name"
+              v-model="$v.formData.name.$model"
             />
           </p>
-          <p class="help is-danger">This field is required</p>
+          <p class="help is-danger" v-if="errors && !$v.formData.name.required">
+            This field is required
+          </p>
         </div>
         <div class="field">
           <p class="control is-expanded">
@@ -21,16 +22,23 @@
               type="email"
               class="input"
               placeholder="Email"
-              required
-              v-model="email"
+              v-model="$v.formData.email.$model"
             />
           </p>
-          <p class="help is-danger">The value is not a valid email</p>
+          <p class="help is-danger" v-if="errors && !$v.formData.email.email">
+            Please enter a valid email
+          </p>
+          <p
+            class="help is-danger"
+            v-if="errors && !$v.formData.email.required"
+          >
+            This field is required
+          </p>
         </div>
         <div class="field">
           <div class="control is-expanded">
             <div class="select is-fullwidth">
-              <select name="user-role" id="" required v-model="role">
+              <select name="user-role" id="" v-model="$v.formData.role.$model">
                 <option value="" disabled selected>Role</option>
                 <option value="student">Student</option>
                 <option value="mentor">Mentor</option>
@@ -38,7 +46,9 @@
               </select>
             </div>
           </div>
-          <p class="help is-danger">Required</p>
+          <p class="help is-danger" v-if="errors && !$v.formData.role.required">
+            This field is required
+          </p>
         </div>
 
         <div class="field">
@@ -47,10 +57,22 @@
               type="password"
               class="input"
               placeholder="Password"
-              v-model="password"
+              v-model="$v.formData.password.$model"
             />
           </p>
-          <p class="help is-danger">The password doesn't meet requirements</p>
+          <p
+            class="help is-danger"
+            v-if="errors && !$v.formData.password.required"
+          >
+            This field is required
+          </p>
+          <p
+            class="help is-danger"
+            v-if="errors && !$v.formData.password.minLength"
+          >
+            Password must be min.
+            {{ $v.formData.password.$params.minLength.min }} characters
+          </p>
         </div>
 
         <div class="field">
@@ -102,38 +124,64 @@
 </template>
 
 <script>
+import { required, email, minLength } from "vuelidate/lib/validators";
+
 export default {
   name: "signup-card",
   data: function() {
     return {
-      name: "",
-      email: "",
-      role: "",
-      password: ""
+      formData: {
+        name: "",
+        email: "",
+        role: "",
+        password: ""
+      },
+      formEmpty: true,
+      errors: false
     };
+  },
+  validations: {
+    formData: {
+      name: {
+        required
+      },
+      email: {
+        required,
+        email
+      },
+      role: {
+        required
+      },
+      password: {
+        required,
+        minLength: minLength(8)
+      }
+    }
   },
   methods: {
     register: function() {
-      const data = {
-        name: this.name,
-        email: this.email,
-        role: this.role,
-        password: this.password
-      };
-      this.$store
-        .dispatch("user/REGISTER", data)
-        .then(() => {
-          this.$router.push("/playground");
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.formEmpty = !this.$v.formData.$anyDirty;
+      this.errors = this.$v.formData.$anyError;
+
+      if (!this.formEmpty && !this.errors) {
+        this.$store
+          .dispatch("user/REGISTER", this.formData)
+          .then(() => {
+            this.$router.push("/playground");
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
     }
   }
 };
 </script>
 
 <style scoped>
+.field {
+  margin-bottom: 1.25rem;
+}
 option {
   background-color: #252525;
   color: rgba(255, 255, 255, 0.87);

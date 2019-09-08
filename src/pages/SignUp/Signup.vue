@@ -1,5 +1,5 @@
 <template>
-  <v-hero>
+  <v-hero class="is-fullheight">
     <template v-slot:hero-content>
       <div class="columns is-vcentered">
         <div class="column is-4 is-offset-4">
