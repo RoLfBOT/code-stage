@@ -6,7 +6,7 @@ export default {
     user: null,
     token: "",
     isLoggedIn: false,
-    error: false
+    error: null
   },
 
   getters: {
@@ -15,6 +15,9 @@ export default {
     },
     NAME: state => {
       return state.user ? state.user.name : "";
+    },
+    ERROR: state => {
+      return state.error;
     }
   },
 
@@ -27,6 +30,9 @@ export default {
       state.isLoggedIn = true;
       setToken(api, state.token);
     },
+    "@SET_ERROR": (state, payload) => {
+      state.error = payload;
+    },
     "@LOGOUT": state => {
       state.user = null;
       state.token = null;
@@ -38,31 +44,37 @@ export default {
     REGISTER: async ({ commit }, payload) => {
       try {
         let { data } = await api.post("/auth/register", payload);
-        const user = data.data.user;
-        const token = data.data.token;
-        const error = data.error;
+        const { error } = data;
+        const { user, token } = data.results;
         if (!error.error) {
           commit("@SET_TOKEN", token);
           commit("@SET_USER", user);
+        } else {
+          commit("@SET_ERROR", error);
         }
-      } catch (err) {
-        console.log("Error Occurred. Please try again");
+      } catch (error) {
+        commit("@SET_ERROR", {
+          error: true,
+          message: "Oops. Something went wrong. Please try again!"
+        });
       }
     },
     LOGIN: async ({ commit }, payload) => {
       try {
         let { data } = await api.post("/auth/login", payload);
-        const user = data.data.user;
-        const token = data.data.token;
-        const error = data.error;
+        const { error } = data;
+        const { user, token } = data.results;
         if (!error.error) {
           commit("@SET_TOKEN", token);
           commit("@SET_USER", user);
         } else {
-          throw new Error("Internal Server Error");
+          commit("@SET_ERROR", error);
         }
       } catch (error) {
-        throw new Error("Login Failed");
+        commit("@SET_ERROR", {
+          error: true,
+          message: "Oops. Something went wrong. Please try again!"
+        });
       }
     }
   }

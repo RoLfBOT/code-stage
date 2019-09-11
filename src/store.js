@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 import editorData from "./shared/store/editor/store.editor";
 import user from "./shared/store/user/store.user";
+import plg from "./pages/Playground/store/store.playground";
 
 export default new Vuex.Store({
   state: {},
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     editor: editorData,
-    user: user
+    user: user,
+    plg: plg
   }
 });

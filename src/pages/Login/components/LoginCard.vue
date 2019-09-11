@@ -10,11 +10,15 @@
               type="text"
               class="input"
               placeholder="email"
-              v-model="email"
-              required
+              v-model.lazy="$v.formData.email.$model"
             />
           </div>
-          <p class="help is-danger">This username is not available</p>
+          <p class="help is-danger" v-if="!$v.formData.email.required">
+            This is a required field
+          </p>
+          <p class="help is-danger" v-if="!$v.formData.email.email">
+            Please enter a valid email
+          </p>
         </div>
 
         <div class="field is-horizontal">
@@ -26,8 +30,7 @@
                     class="input"
                     :type="passwordType"
                     placeholder="Password"
-                    v-model="password"
-                    required
+                    v-model="$v.formData.password.$model"
                   />
                 </p>
                 <p class="control">
@@ -47,7 +50,9 @@
                   </a>
                 </p>
               </div>
-              <p class="help is-danger">Password is incorrect</p>
+              <p class="help is-danger" v-if="!$v.formData.password.required">
+                This field is required
+              </p>
             </div>
           </div>
         </div>
@@ -104,16 +109,33 @@
 </template>
 
 <script>
+import { required, email } from "vuelidate/lib/validators";
+
 export default {
   name: "login-card",
   data: function() {
     return {
       showPassword: false,
       passwordType: "password",
-      email: "",
-      password: ""
+      formData: {
+        email: "",
+        password: ""
+      }
     };
   },
+
+  validations: {
+    formData: {
+      email: {
+        required,
+        email
+      },
+      password: {
+        required
+      }
+    }
+  },
+
   methods: {
     togglePasswordVisibility: function() {
       if (this.passwordType === "password") {
@@ -126,7 +148,7 @@ export default {
     },
     login: function() {
       this.$store
-        .dispatch("user/LOGIN", { email: this.email, password: this.password })
+        .dispatch("user/LOGIN", this.formData)
         .then(() => {
           this.$router.push({ path: "/playground" });
         })
@@ -139,6 +161,10 @@ export default {
 </script>
 
 <style scoped>
+.field {
+  margin-bottom: 1.25rem;
+}
+
 .title {
   color: rgba(255, 255, 255, 0.87);
 }

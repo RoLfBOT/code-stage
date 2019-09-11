@@ -40,6 +40,9 @@ export default {
     "v-editor-card": EditorCard,
     "v-output-card": OutputCard,
     "v-stdin-card": StdinCard
+  },
+  created() {
+    this.$store.dispatch("plg/LoadFromServer");
   }
 };
 </script>

@@ -9,10 +9,10 @@
               type="text"
               class="input"
               placeholder="Name"
-              v-model="$v.formData.name.$model"
+              v-model.lazy="$v.formData.name.$model"
             />
           </p>
-          <p class="help is-danger" v-if="errors && !$v.formData.name.required">
+          <p class="help is-danger" v-if="!$v.formData.name.required">
             This field is required
           </p>
         </div>
@@ -22,23 +22,24 @@
               type="email"
               class="input"
               placeholder="Email"
-              v-model="$v.formData.email.$model"
+              v-model.lazy="$v.formData.email.$model"
             />
           </p>
-          <p class="help is-danger" v-if="errors && !$v.formData.email.email">
+          <p class="help is-danger" v-if="!$v.formData.email.email">
             Please enter a valid email
           </p>
-          <p
-            class="help is-danger"
-            v-if="errors && !$v.formData.email.required"
-          >
+          <p class="help is-danger" v-if="!$v.formData.email.required">
             This field is required
           </p>
         </div>
         <div class="field">
           <div class="control is-expanded">
             <div class="select is-fullwidth">
-              <select name="user-role" id="" v-model="$v.formData.role.$model">
+              <select
+                name="user-role"
+                id=""
+                v-model.lazy="$v.formData.role.$model"
+              >
                 <option value="" disabled selected>Role</option>
                 <option value="student">Student</option>
                 <option value="mentor">Mentor</option>
@@ -46,7 +47,7 @@
               </select>
             </div>
           </div>
-          <p class="help is-danger" v-if="errors && !$v.formData.role.required">
+          <p class="help is-danger" v-if="!$v.formData.role.required">
             This field is required
           </p>
         </div>
@@ -60,16 +61,10 @@
               v-model="$v.formData.password.$model"
             />
           </p>
-          <p
-            class="help is-danger"
-            v-if="errors && !$v.formData.password.required"
-          >
+          <p class="help is-danger" v-if="!$v.formData.password.required">
             This field is required
           </p>
-          <p
-            class="help is-danger"
-            v-if="errors && !$v.formData.password.minLength"
-          >
+          <p class="help is-danger" v-if="!$v.formData.password.minLength">
             Password must be min.
             {{ $v.formData.password.$params.minLength.min }} characters
           </p>
@@ -164,14 +159,9 @@ export default {
       this.errors = this.$v.formData.$anyError;
 
       if (!this.formEmpty && !this.errors) {
-        this.$store
-          .dispatch("user/REGISTER", this.formData)
-          .then(() => {
-            this.$router.push("/playground");
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        this.$store.dispatch("user/REGISTER", this.formData).then(() => {
+          this.$router.push("/playground");
+        });
       }
     }
   }
