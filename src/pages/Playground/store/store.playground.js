@@ -4,7 +4,7 @@ import base64 from "base-64";
 export default {
   namespaced: true,
   state: {
-    title: "",
+    title: "Untitled",
     source: "",
     error: null
   },
@@ -23,6 +23,14 @@ export default {
       state.source = "";
     }
   },
+  getters: {
+    TITLE: state => {
+      return state.title;
+    },
+    SOURCE: state => {
+      return state.source;
+    }
+  },
   actions: {
     SaveToServer: async ({ commit }, payload) => {
       try {
@@ -32,7 +40,7 @@ export default {
         if (!error.error) {
           commit("@SET_TITLE", code.title);
           commit("@SET_SOURCE", base64.decode(code.source));
-          commit("editor/@SET_MODE", code.language);
+          commit("editor/@SET_MODE", code.language, { root: true });
         } else {
           commit("@SET_ERROR", error);
         }
@@ -44,9 +52,6 @@ export default {
       }
     },
     LoadFromServer: async ({ rootState, commit }) => {
-      if (rootState.route.name !== "saved") {
-        return;
-      }
       const codeId = rootState.route.params.id;
       try {
         let { data } = await api.get(`/plg/get/${codeId}`);
@@ -55,7 +60,7 @@ export default {
         if (!error.error) {
           commit("@SET_TITLE", code.title);
           commit("@SET_SOURCE", base64.decode(code.source));
-          commit("editor/@SET_MODE", code.title);
+          commit("editor/@SET_MODE", code.language, { root: true });
           commit("@SET_ERROR", error);
         } else {
           commit("@SET_ERROR", error);

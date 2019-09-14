@@ -41,8 +41,18 @@ export default {
     "v-output-card": OutputCard,
     "v-stdin-card": StdinCard
   },
-  created() {
-    this.$store.dispatch("plg/LoadFromServer");
+  mounted() {
+    this.$store.subscribe((mutation, state) => {
+      switch (mutation.type) {
+        case "route/ROUTE_CHANGED":
+          if (state.route.name === "saved") {
+            this.$store.dispatch("plg/LoadFromServer");
+          } else if (state.route.name === "new") {
+            this.$store.commit("plg/@RESET");
+          }
+          break;
+      }
+    });
   }
 };
 </script>

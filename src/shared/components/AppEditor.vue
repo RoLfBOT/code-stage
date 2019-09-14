@@ -16,32 +16,43 @@ export default {
     };
   },
 
+  props: {
+    source: String
+  },
+
   computed: {
     ...mapState("editor", ["mode", "theme", "fontSize", "tabs"])
   },
 
   watch: {
-    mode(newMode) {
-      this.editor.session.setMode("ace/mode/" + newMode);
-    },
-    theme(newTheme) {
-      this.editor.setTheme("ace/theme/" + newTheme);
-    },
-    fontSize(newFontSize) {
-      this.editor.setFontSize(newFontSize);
-    },
-    tabs(newTabs) {
-      this.editor.session.setTabSize(newTabs);
+    source(newSource) {
+      this.editor.setValue(newSource, 1);
     }
   },
 
   mounted() {
     this.editor = Ace.edit("editor", {
-      mode: "ace/mode/c_cpp",
-      theme: "ace/theme/monokai",
-      fontSize: 16
+      mode: "ace/mode/" + this.mode,
+      theme: "ace/theme/" + this.theme,
+      fontSize: this.fontSize
     });
-    this.editor.setValue("#include<bits/stdc++.h>\nusing namspace std;", 1);
+
+    this.$store.subscribe(mutation => {
+      switch (mutation.type) {
+        case "editor/@SET_MODE":
+          this.editor.session.setMode("ace/mode/" + this.mode);
+          break;
+        case "editor/@SET_THEME":
+          this.editor.setTheme("ace/theme/" + this.theme);
+          break;
+        case "editor/@SET_FONTSIZE":
+          this.editor.setFontSize(this.fontSize);
+          break;
+        case "editor/@SET_TABS":
+          this.editor.session.setTabSize(this.tabs);
+          break;
+      }
+    });
   }
 };
 </script>

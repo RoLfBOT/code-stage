@@ -3,7 +3,7 @@
     <div class="card">
       <header class="card-header">
         <p class="card-header-title" v-if="!editTitle">
-          {{ editorTitle }}&nbsp;<span
+          {{ title }}&nbsp;<span
             class="icon edit-title"
             @click="editTitle = true"
             ><i class="fa fa-pencil"></i
@@ -13,7 +13,7 @@
           <input
             class="input"
             type="text"
-            v-model="editorTitle"
+            v-model="title"
             maxlength="20"
             @keydown.enter="editTitle = false"
           />
@@ -32,7 +32,7 @@
         </div>
       </header>
       <div class="card-content editor-container">
-        <v-editor></v-editor>
+        <v-editor :source="source"></v-editor>
       </div>
       <footer class="card-footer">
         <div class="card-footer-item">
@@ -59,6 +59,7 @@
 <script>
 import AppEditor from "@/shared/components/AppEditor";
 import EditorSettingsModal from "./EditorSettingsModal";
+import { mapState } from "vuex";
 
 export default {
   name: "editor-card",
@@ -71,9 +72,20 @@ export default {
   data: function() {
     return {
       showSettings: false,
-      editTitle: false,
-      editorTitle: "Untitled"
+      editTitle: false
     };
+  },
+
+  computed: {
+    ...mapState("plg", ["source"]),
+    title: {
+      get() {
+        return this.$store.getters["plg/TITLE"];
+      },
+      set(value) {
+        this.$store.commit("plg/@SET_TITLE", value);
+      }
+    }
   },
 
   methods: {
