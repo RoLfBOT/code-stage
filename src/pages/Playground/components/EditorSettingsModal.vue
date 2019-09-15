@@ -111,15 +111,46 @@ export default {
   name: "editor-settings-modal",
   data: function() {
     return {
-      selectMode: "c_cpp",
-      selectTheme: "monokai",
-      selectFontSize: 16,
-      selectTabs: 4,
       themes: Themes,
       modes: Modes,
       fontSizes: FontSizes,
       tabSizes: TabSizes
     };
+  },
+
+  computed: {
+    selectMode: {
+      get() {
+        return this.$store.getters["editor/MODE"];
+      },
+      set(value) {
+        this.setMode(value);
+      }
+    },
+    selectTheme: {
+      get() {
+        return this.$store.getters["editor/THEME"];
+      },
+      set(value) {
+        this.setTheme(value);
+      }
+    },
+    selectFontSize: {
+      get() {
+        return this.$store.getters["editor/FONTSIZE"];
+      },
+      set(value) {
+        this.setFontSize(value);
+      }
+    },
+    selectTabs: {
+      get() {
+        return this.$store.getters["editor/TABS"];
+      },
+      set(value) {
+        this.setTabs(value);
+      }
+    }
   },
 
   methods: {
@@ -129,21 +160,6 @@ export default {
       setFontSize: "@SET_FONTSIZE",
       setTabs: "@SET_TABS"
     })
-  },
-
-  watch: {
-    selectMode(newMode) {
-      this.setMode(newMode);
-    },
-    selectTheme(newTheme) {
-      this.setTheme(newTheme);
-    },
-    selectFontSize(newFontSize) {
-      this.setFontSize(newFontSize);
-    },
-    selectTabs(newTabs) {
-      this.setTabs(newTabs);
-    }
   }
 };
 </script>

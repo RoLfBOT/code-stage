@@ -4,7 +4,7 @@ export default {
     mode: "c_cpp",
     theme: "monokai",
     fontSize: 16,
-    tabs: 2
+    tabs: 4
   },
 
   getters: {

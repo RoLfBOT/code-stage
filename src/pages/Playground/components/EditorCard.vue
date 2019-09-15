@@ -32,7 +32,7 @@
         </div>
       </header>
       <div class="card-content editor-container">
-        <v-editor :source="source"></v-editor>
+        <v-editor :source="source" @code-change="updateCode"></v-editor>
       </div>
       <footer class="card-footer">
         <div class="card-footer-item">
@@ -41,7 +41,7 @@
               <span class="icon"><i class="fa fa-play"></i></span>
               <span>Run Code</span>
             </button>
-            <button class="button is-info is-rounded">
+            <button class="button is-info is-rounded" @click="save">
               <span class="icon"><i class="fa fa-floppy-o"></i></span>
               <span>Save</span>
             </button>
@@ -72,7 +72,8 @@ export default {
   data: function() {
     return {
       showSettings: false,
-      editTitle: false
+      editTitle: false,
+      localSource: ""
     };
   },
 
@@ -89,6 +90,20 @@ export default {
   },
 
   methods: {
+    updateCode: function(payload) {
+      this.localSource = payload;
+    },
+
+    save: function() {
+      this.$store.commit("plg/@SET_SOURCE", this.localSource);
+      this.$store.dispatch("plg/SaveToServer").then(() => {
+        this.$router.push({
+          name: "saved",
+          params: { id: this.$store.getters["plg/ID"] }
+        });
+      });
+    },
+
     show: function() {
       let html = document.documentElement;
       html.classList.add("is-clipped");

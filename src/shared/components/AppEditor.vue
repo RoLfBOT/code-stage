@@ -27,6 +27,7 @@ export default {
   watch: {
     source(newSource) {
       this.editor.setValue(newSource, 1);
+      this.editor.session.getUndoManager().reset();
     }
   },
 
@@ -35,6 +36,12 @@ export default {
       mode: "ace/mode/" + this.mode,
       theme: "ace/theme/" + this.theme,
       fontSize: this.fontSize
+    });
+
+    this.editor.on("input", () => {
+      if (!this.editor.session.getUndoManager().isClean()) {
+        this.$emit("code-change", this.editor.getValue());
+      }
     });
 
     this.$store.subscribe(mutation => {
