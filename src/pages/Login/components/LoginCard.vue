@@ -150,7 +150,7 @@ export default {
       this.$store
         .dispatch("user/LOGIN", this.formData)
         .then(() => {
-          this.$router.push({ path: "/playground" });
+          this.$router.push({ name: "new" });
         })
         .catch(err => {
           console.log(err);

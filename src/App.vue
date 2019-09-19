@@ -20,4 +20,8 @@ input:focus {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
 }
+
+button::-moz-focus-inner {
+  border: 0;
+}
 </style>

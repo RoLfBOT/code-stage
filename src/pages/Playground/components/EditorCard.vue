@@ -41,7 +41,11 @@
               <span class="icon"><i class="fa fa-play"></i></span>
               <span>Run Code</span>
             </button>
-            <button class="button is-info is-rounded" @click="save">
+            <button
+              class="button is-info is-rounded"
+              @click="save"
+              :disabled="disableSave"
+            >
               <span class="icon"><i class="fa fa-floppy-o"></i></span>
               <span>Save</span>
             </button>
@@ -73,7 +77,8 @@ export default {
     return {
       showSettings: false,
       editTitle: false,
-      localSource: ""
+      localSource: "",
+      disableSave: true
     };
   },
 
@@ -91,6 +96,7 @@ export default {
 
   methods: {
     updateCode: function(payload) {
+      this.disableSave = false;
       this.localSource = payload;
     },
 

@@ -7,7 +7,8 @@ export default {
     codeId: "",
     title: "Untitled",
     source: "",
-    error: null
+    error: null,
+    savedList: null
   },
   mutations: {
     "@SET_CODEID": (state, payload) => {
@@ -21,6 +22,9 @@ export default {
     },
     "@SET_ERROR": (state, payload) => {
       state.error = payload;
+    },
+    "@SET_SAVEDLIST": (state, payload) => {
+      state.savedList = payload;
     },
     "@RESET": state => {
       state.codeId = "";
@@ -74,13 +78,31 @@ export default {
         const { error } = data;
         const { code } = data.results;
         if (!error.error) {
+          commit("@SET_CODEID", code.codeId);
           commit("@SET_TITLE", code.title);
           commit("@SET_SOURCE", base64.decode(code.source));
-          commit("editor/@SET_MODE", code.language, { root: true });
           commit("@SET_ERROR", error);
+          commit("editor/@SET_MODE", code.language, { root: true });
         } else {
           commit("@SET_ERROR", error);
         }
+      } catch (err) {
+        commit("@SET_ERROR", {
+          error: true,
+          message: "Oops. Something went wrong. Please try again!"
+        });
+      }
+    },
+    GetAllFromServer: async ({ commit }) => {
+      try {
+        let { data } = await api.get("/plg/all");
+        const { error } = data;
+        const { codeList } = data.results;
+        if (!error.error) {
+          commit("@SET_SAVEDLIST", codeList);
+          commit("@SET_ERROR", error);
+        }
+        commit("@SET_ERROR", error);
       } catch (err) {
         commit("@SET_ERROR", {
           error: true,

@@ -3,14 +3,31 @@ import { requireAuth } from "@/utils/routeGuards";
 const PlaygroundRoutes = [
   {
     path: "/playground",
-    name: "new",
-    component: () => import("../Playground"),
-    beforeEnter: requireAuth
-  },
-  {
-    path: "/playground/s/:id",
-    name: "saved",
-    component: () => import("../Playground"),
+    redirect: "/playground/new",
+    component: () => import("../Index"),
+    children: [
+      {
+        path: "new",
+        name: "new",
+        components: {
+          playground: () => import("../layouts/EditorLayout")
+        }
+      },
+      {
+        path: "s/:id",
+        name: "saved",
+        components: {
+          playground: () => import("../layouts/EditorLayout")
+        }
+      },
+      {
+        path: "all",
+        name: "all",
+        components: {
+          playground: () => import("../layouts/SavedList")
+        }
+      }
+    ],
     beforeEnter: requireAuth
   }
 ];
