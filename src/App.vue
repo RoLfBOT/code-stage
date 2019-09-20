@@ -9,6 +9,16 @@ export default {};
 </script>
 
 <style>
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#app {
+  flex: 1;
+}
+
 select,
 select:focus,
 textarea,
