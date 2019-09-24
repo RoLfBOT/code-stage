@@ -16,19 +16,9 @@ export default {
     };
   },
 
-  props: {
-    source: String
-  },
-
   computed: {
-    ...mapState("editor", ["mode", "theme", "fontSize", "tabs"])
-  },
-
-  watch: {
-    source(newSource) {
-      this.editor.setValue(newSource, 1);
-      this.editor.session.getUndoManager().reset();
-    }
+    ...mapState("editor", ["mode", "theme", "fontSize", "tabs"]),
+    ...mapState("plg", ["source"])
   },
 
   mounted() {
@@ -57,6 +47,10 @@ export default {
           break;
         case "editor/@SET_TABS":
           this.editor.session.setTabSize(this.tabs);
+          break;
+        case "plg/@SET_SOURCE":
+          this.editor.setValue(this.source, 1);
+          this.editor.session.getUndoManager().reset();
           break;
       }
     });

@@ -32,7 +32,7 @@
         </div>
       </header>
       <div class="card-content editor-container">
-        <v-editor :source="source" @code-change="updateCode"></v-editor>
+        <v-editor @code-change="updateCode"></v-editor>
       </div>
       <footer class="card-footer">
         <div class="card-footer-item">
@@ -63,7 +63,6 @@
 <script>
 import AppEditor from "@/shared/components/AppEditor";
 import EditorSettingsModal from "./EditorSettingsModal";
-import { mapState } from "vuex";
 
 export default {
   name: "editor-card",
@@ -83,12 +82,12 @@ export default {
   },
 
   computed: {
-    ...mapState("plg", ["source"]),
     title: {
       get() {
         return this.$store.getters["plg/TITLE"];
       },
       set(value) {
+        this.disableSave = false;
         this.$store.commit("plg/@SET_TITLE", value);
       }
     }
@@ -101,7 +100,9 @@ export default {
     },
 
     save: function() {
-      this.$store.commit("plg/@SET_SOURCE", this.localSource);
+      if (this.localSource) {
+        this.$store.commit("plg/@SET_SOURCE", this.localSource);
+      }
       this.$store.dispatch("plg/SaveToServer").then(() => {
         this.$router.push({
           name: "saved",

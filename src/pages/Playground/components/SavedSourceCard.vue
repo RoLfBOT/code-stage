@@ -54,10 +54,12 @@ export default {
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid #66d8cd;
+  -webkit-column-break-inside: avoid;
 }
 
 .box {
   color: rgba(255, 255, 255, 0.87);
   background-color: #1e1e1e;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
 }
 </style>

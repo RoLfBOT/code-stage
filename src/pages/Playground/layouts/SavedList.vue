@@ -35,24 +35,28 @@ export default {
   margin: 1.5em auto;
   max-width: 100%;
   column-gap: 1.5em;
+  -webkit-column-gap: 1.5em;
   column-rule: 1px solid #66d8cd;
 }
 
 @media only screen and (min-width: 1024px) {
   .masonry {
     column-count: 4;
+    -webkit-column-count: 4;
   }
 }
 
 @media only screen and (max-width: 1023px) and (min-width: 769px) {
   .masonry {
     column-count: 3;
+    -webkit-column-count: 3;
   }
 }
 
-@media only screen and (max-width: 768px) and (min-width: 540px) {
+/* @media only screen and (max-width: 768px) and (min-width: 540px) {
   .masonry {
     column-count: 2;
+    -webkit-column-count: 2;
   }
-}
+} */
 </style>

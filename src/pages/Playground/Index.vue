@@ -21,7 +21,7 @@ export default {
     "v-base-layout": AppBaseLayout,
     "v-footer": AppFooter
   },
-  mounted() {
+  created() {
     this.$store.subscribe((mutation, state) => {
       switch (mutation.type) {
         case "route/ROUTE_CHANGED":
@@ -36,5 +36,3 @@ export default {
   }
 };
 </script>
-
-<style scoped></style>

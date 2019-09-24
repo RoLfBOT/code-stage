@@ -150,7 +150,7 @@ export default {
       this.$store
         .dispatch("user/LOGIN", this.formData)
         .then(() => {
-          this.$router.push({ name: "new" });
+          this.$router.push({ name: "all" });
         })
         .catch(err => {
           console.log(err);
