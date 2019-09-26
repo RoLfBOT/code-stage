@@ -49,11 +49,16 @@ export default {
           this.editor.session.setTabSize(this.tabs);
           break;
         case "plg/@SET_SOURCE":
+        case "plg/@RESET":
           this.editor.setValue(this.source, 1);
           this.editor.session.getUndoManager().reset();
           break;
       }
     });
+  },
+  beforeDestroy() {
+    this.editor.destroy();
+    this.editor.container.remove();
   }
 };
 </script>
