@@ -37,9 +37,13 @@
       <footer class="card-footer">
         <div class="card-footer-item">
           <div class="buttons">
-            <button class="button is-primary is-rounded">
+            <button
+              class="button is-primary is-rounded"
+              @click="run"
+              :disabled="runningCode"
+            >
               <span class="icon"><i class="fa fa-play"></i></span>
-              <span>Run Code</span>
+              <span>{{ runningCode ? "Running" : "Run Code" }}</span>
             </button>
             <button
               class="button is-info is-rounded"
@@ -77,7 +81,8 @@ export default {
       showSettings: false,
       editTitle: false,
       localSource: "",
-      disableSave: true
+      disableSave: true,
+      runningCode: false
     };
   },
 
@@ -108,6 +113,16 @@ export default {
           name: "saved",
           params: { id: this.$store.getters["plg/ID"] }
         });
+      });
+    },
+
+    run: function() {
+      if (this.localSource) {
+        this.$store.commit("plg/@SET_SOURCE", this.localSource);
+      }
+      this.runningCode = true;
+      this.$store.dispatch("plg/RunCode").then(() => {
+        this.runningCode = false;
       });
     },
 

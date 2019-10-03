@@ -8,7 +8,8 @@ export default {
     title: "Untitled",
     source: "",
     error: null,
-    savedList: null
+    savedList: null,
+    output: ""
   },
   mutations: {
     "@SET_CODEID": (state, payload) => {
@@ -20,6 +21,9 @@ export default {
     "@SET_SOURCE": (state, payload) => {
       state.source = payload;
     },
+    "@SET_OUTPUT": (state, payload) => {
+      state.output = payload;
+    },
     "@SET_ERROR": (state, payload) => {
       state.error = payload;
     },
@@ -30,6 +34,7 @@ export default {
       state.codeId = "";
       state.title = "Untitled";
       state.source = "";
+      state.output = "";
     }
   },
   getters: {
@@ -107,6 +112,30 @@ export default {
         commit("@SET_ERROR", {
           error: true,
           message: "Oops. Something went wrong. Please try again!"
+        });
+      }
+    },
+    RunCode: async ({ state, commit, rootGetters }, stdin) => {
+      const program = {
+        source: base64.encode(state.source),
+        stdin: stdin,
+        language: rootGetters["editor/MODE"]
+      };
+
+      try {
+        let { data } = await api.post("/plg/run", program);
+        const { error } = data;
+        const { output, statusCode } = data.results;
+        if (!error.error) {
+          statusCode === 200
+            ? commit("@SET_OUTPUT", output)
+            : commit("@SET_OUTPUT", data.results.error);
+          commit("@SET_ERROR", error);
+        }
+      } catch (err) {
+        commit("@SET_ERROR", {
+          error: true,
+          message: err.message
         });
       }
     }

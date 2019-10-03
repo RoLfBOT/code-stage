@@ -7,7 +7,7 @@
       <div
         class="card-header-icon tooltip is-tooltip-bottom is-tooltip-left-mobile"
         data-tooltip="Copy"
-        v-clipboard:copy="outputText"
+        v-clipboard:copy="output"
         v-clipboard:success="onCopy"
         v-clipboard:error="onError"
       >
@@ -17,12 +17,12 @@
       </div>
     </header>
     <div class="card-content output-container">
-      <pre class="output-text">{{ outputText }}</pre>
+      <pre class="output-text">{{ output }}</pre>
     </div>
     <footer class="card-footer">
       <div class="card-footer-item">
         <div class="buttons">
-          <button class="button is-primary is-rounded" @click="outputText = ''">
+          <button class="button is-primary is-rounded" @click="clearOutput">
             <span class="icon"><i class="fa fa-trash-o"></i></span>
             <span>Clear Output</span>
           </button>
@@ -34,14 +34,18 @@
 
 <script>
 import { copyHandlers } from "@/shared/mixins/copyHandlers";
+import { mapState } from "vuex";
 
 export default {
   name: "output-card",
   mixins: [copyHandlers],
-  data: function() {
-    return {
-      outputText: "Hello"
-    };
+  computed: {
+    ...mapState("plg", ["output"])
+  },
+  methods: {
+    clearOutput: function() {
+      this.$store.commit("plg/@SET_OUTPUT", "");
+    }
   }
 };
 </script>
