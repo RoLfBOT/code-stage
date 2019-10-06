@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="container">
-      <div class="navbar-brand">
-        <router-link to="/" class="navbar-item">CodeSmash</router-link>
+      <div class="navbar-brand" v-if="!$route.name === 'home-page'">
+        <router-link to="/" class="navbar-item">CodeStage</router-link>
         <a
           role="button"
           class="navbar-burger"

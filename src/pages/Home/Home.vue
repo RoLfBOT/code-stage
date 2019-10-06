@@ -5,9 +5,9 @@
       <template v-slot:hero-content>
         <div class="columns is-vcentered">
           <div class="column is-half has-text-centered-mobile">
-            <p class="title has-text-primary">CodeSmash</p>
+            <p class="title has-text-primary">CodeStage</p>
             <p class="subtitle has-text-white">
-              CodeSmash is the modern programming experience for educators and
+              Modern programming experience for developers, data scientists and
               competitive coders.
             </p>
             <router-link class="button is-rounded is-primary" to="/register"
