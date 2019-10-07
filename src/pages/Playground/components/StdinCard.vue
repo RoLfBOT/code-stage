@@ -21,7 +21,7 @@
         class="textarea is-black"
         rows="5"
         placeholder="Standard Input"
-        v-model="stdin"
+        v-model.lazy="stdin"
       ></textarea>
     </div>
   </div>
@@ -33,10 +33,15 @@ import { copyHandlers } from "@/shared/mixins/copyHandlers";
 export default {
   name: "stdin-card",
   mixins: [copyHandlers],
-  data: function() {
-    return {
-      stdin: ""
-    };
+  computed: {
+    stdin: {
+      get() {
+        return this.$store.getters["plg/STDIN"];
+      },
+      set(value) {
+        this.$store.commit("plg/@SET_STDIN", value);
+      }
+    }
   }
 };
 </script>

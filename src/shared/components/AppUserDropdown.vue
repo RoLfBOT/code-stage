@@ -13,7 +13,7 @@
     <div class="navbar-dropdown is-right is-boxed">
       <p class="navbar-item">Signed in as {{ loggedInAs }}</p>
       <hr class="navbar-divider" />
-      <button class="navbar-item button">Sign Out</button>
+      <button class="navbar-item button" @click="logout">Sign Out</button>
     </div>
   </div>
 </template>
@@ -32,6 +32,10 @@ export default {
   methods: {
     closeDropdown: function() {
       this.showComponent = false;
+    },
+    logout: function() {
+      this.$store.commit("user/@LOGOUT");
+      this.$router.push({ name: "login-page" });
     }
   },
   directives: {

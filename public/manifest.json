@@ -1,6 +1,6 @@
 {
-  "name": "code-smash",
-  "short_name": "code-smash",
+  "name": "CodeStage",
+  "short_name": "CStage",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",

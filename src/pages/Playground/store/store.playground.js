@@ -9,7 +9,8 @@ export default {
     source: "",
     error: null,
     savedList: null,
-    output: ""
+    output: "",
+    stdin: ""
   },
   mutations: {
     "@SET_CODEID": (state, payload) => {
@@ -24,6 +25,9 @@ export default {
     "@SET_OUTPUT": (state, payload) => {
       state.output = payload;
     },
+    "@SET_STDIN": (state, payload) => {
+      state.stdin = payload;
+    },
     "@SET_ERROR": (state, payload) => {
       state.error = payload;
     },
@@ -35,6 +39,7 @@ export default {
       state.title = "Untitled";
       state.source = "";
       state.output = "";
+      state.stdin = "";
     }
   },
   getters: {
@@ -46,6 +51,9 @@ export default {
     },
     SOURCE: state => {
       return state.source;
+    },
+    STDIN: state => {
+      return state.stdin;
     }
   },
   actions: {
@@ -115,10 +123,10 @@ export default {
         });
       }
     },
-    RunCode: async ({ state, commit, rootGetters }, stdin) => {
+    RunCode: async ({ state, commit, rootGetters }) => {
       const program = {
         source: base64.encode(state.source),
-        stdin: stdin,
+        stdin: state.stdin,
         language: rootGetters["editor/MODE"]
       };
 

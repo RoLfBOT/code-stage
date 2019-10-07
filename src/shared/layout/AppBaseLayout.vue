@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-content">
     <v-navbar class="navbar-bg-dark">
       <template v-slot:navbar-end-item>
         <v-user-dropdown></v-user-dropdown>
@@ -24,6 +24,12 @@ export default {
 </script>
 
 <style scoped>
+.app-content {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 .navbar-bg-dark {
   background-color: #1e1e1e;
   box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.25);

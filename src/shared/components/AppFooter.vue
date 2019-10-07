@@ -4,7 +4,7 @@
       <slot name="footer-content">
         <p>
           <span class="icon"><i class="fa fa-copyright"></i></span>Copyright
-          CodeSmash Inc.
+          CodeStage Inc.
         </p>
       </slot>
     </div>

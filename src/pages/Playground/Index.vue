@@ -36,3 +36,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.section {
+  flex: 1;
+}
+</style>
