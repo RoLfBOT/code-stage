@@ -19,7 +19,7 @@
     <div class="card-content stdin-container">
       <textarea
         class="textarea is-black"
-        rows="5"
+        rows="15"
         placeholder="Standard Input"
         v-model.lazy="stdin"
       ></textarea>

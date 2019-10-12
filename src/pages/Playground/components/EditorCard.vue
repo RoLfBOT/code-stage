@@ -3,7 +3,11 @@
     <div class="card">
       <header class="card-header">
         <p class="card-header-title" v-if="!editTitle">
-          {{ title }}&nbsp;<span
+          <span class="icon">
+            <figure class="image is-24x24">
+              <img :src="getImgSrc(mode)" alt="" />
+            </figure> </span
+          >&nbsp; {{ title }}&nbsp;<span
             class="icon edit-title"
             @click="editTitle = true"
             ><i class="fa fa-pencil"></i
@@ -67,6 +71,7 @@
 <script>
 import AppEditor from "@/shared/components/AppEditor";
 import EditorSettingsModal from "./EditorSettingsModal";
+import { mapState } from "vuex";
 
 export default {
   name: "editor-card",
@@ -87,6 +92,7 @@ export default {
   },
 
   computed: {
+    ...mapState("editor", ["mode"]),
     title: {
       get() {
         return this.$store.getters["plg/TITLE"];
@@ -99,6 +105,10 @@ export default {
   },
 
   methods: {
+    getImgSrc(language) {
+      return require(`@/assets/images/${language}.svg`);
+    },
+
     updateCode: function(payload) {
       this.disableSave = false;
       this.localSource = payload;

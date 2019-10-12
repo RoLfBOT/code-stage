@@ -4,7 +4,10 @@
       <article class="media">
         <div class="media-left">
           <figure class="image is-64x64">
-            <img :src="getImgSrc(savedItem.language)" alt="C++" />
+            <img
+              :src="getImgSrc(savedItem.language)"
+              :alt="savedItem.language"
+            />
           </figure>
         </div>
         <div class="media-content">

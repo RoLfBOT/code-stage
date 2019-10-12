@@ -82,8 +82,8 @@ export default {
 
 pre {
   white-space: pre;
-  max-height: 65vh;
-  min-height: 65vh;
+  max-height: 45vh;
+  min-height: 45vh;
   height: 100%;
   overflow: auto;
   word-break: normal !important;

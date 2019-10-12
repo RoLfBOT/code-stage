@@ -25,7 +25,8 @@ export default {
     this.editor = Ace.edit("editor", {
       mode: "ace/mode/" + this.mode,
       theme: "ace/theme/" + this.theme,
-      fontSize: this.fontSize
+      fontSize: this.fontSize,
+      showPrintMargin: false
     });
 
     this.editor.on("input", () => {
