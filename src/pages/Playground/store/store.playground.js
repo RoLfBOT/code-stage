@@ -6,7 +6,6 @@ export default {
   state: {
     codeId: "",
     title: "Untitled",
-    source: "",
     error: null,
     savedList: null,
     output: "",
@@ -18,9 +17,6 @@ export default {
     },
     "@SET_TITLE": (state, payload) => {
       state.title = payload;
-    },
-    "@SET_SOURCE": (state, payload) => {
-      state.source = payload;
     },
     "@SET_OUTPUT": (state, payload) => {
       state.output = payload;
@@ -37,7 +33,6 @@ export default {
     "@RESET": state => {
       state.codeId = "";
       state.title = "Untitled";
-      state.source = "";
       state.output = "";
       state.stdin = "";
     }
@@ -49,9 +44,6 @@ export default {
     TITLE: state => {
       return state.title;
     },
-    SOURCE: state => {
-      return state.source;
-    },
     STDIN: state => {
       return state.stdin;
     }
@@ -62,7 +54,7 @@ export default {
         codeId: state.codeId,
         title: state.title,
         language: rootGetters["editor/MODE"],
-        source: base64.encode(state.source)
+        source: base64.encode(rootGetters["editor/SOURCE"])
       };
 
       try {
@@ -93,9 +85,11 @@ export default {
         if (!error.error) {
           commit("@SET_CODEID", code.codeId);
           commit("@SET_TITLE", code.title);
-          commit("@SET_SOURCE", base64.decode(code.source));
           commit("@SET_ERROR", error);
           commit("editor/@SET_MODE", code.language, { root: true });
+          commit("editor/@SET_SOURCE", base64.decode(code.source), {
+            root: true
+          });
         } else {
           commit("@SET_ERROR", error);
         }
@@ -125,7 +119,7 @@ export default {
     },
     RunCode: async ({ state, commit, rootGetters }) => {
       const program = {
-        source: base64.encode(state.source),
+        source: base64.encode(rootGetters["editor/SOURCE"]),
         stdin: state.stdin,
         language: rootGetters["editor/MODE"]
       };

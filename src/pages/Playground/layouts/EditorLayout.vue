@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import EditorCard from "../components/EditorCard";
-import OutputCard from "../components/OutputCard";
-import StdinCard from "../components/StdinCard";
+import EditorCard from "@/shared/components/editor/AppEditorCard";
+import OutputCard from "@/shared/components/editor/AppOutputCard";
+import StdinCard from "@/shared/components/editor/AppStdinCard";
 
 export default {
   name: "playground-editor",

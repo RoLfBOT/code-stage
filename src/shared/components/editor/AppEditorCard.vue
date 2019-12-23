@@ -36,7 +36,7 @@
         </div>
       </header>
       <div class="card-content editor-container">
-        <v-editor @code-change="updateCode"></v-editor>
+        <v-editor v-model="localSource"></v-editor>
       </div>
       <footer class="card-footer">
         <div class="card-footer-item">
@@ -49,11 +49,7 @@
               <span class="icon"><i class="fa fa-play"></i></span>
               <span>{{ runningCode ? "Running" : "Run Code" }}</span>
             </button>
-            <button
-              class="button is-info is-rounded"
-              @click="save"
-              :disabled="disableSave"
-            >
+            <button class="button is-info is-rounded" @click="save">
               <span class="icon"><i class="fa fa-floppy-o"></i></span>
               <span>Save</span>
             </button>
@@ -69,8 +65,8 @@
 </template>
 
 <script>
-import AppEditor from "@/shared/components/AppEditor";
-import EditorSettingsModal from "./EditorSettingsModal";
+import AppEditor from "./AppEditor";
+import EditorSettingsModal from "./AppEditorSettingsModal";
 import { mapState } from "vuex";
 
 export default {
@@ -86,7 +82,6 @@ export default {
       showSettings: false,
       editTitle: false,
       localSource: "",
-      disableSave: true,
       runningCode: false
     };
   },
@@ -98,7 +93,6 @@ export default {
         return this.$store.getters["plg/TITLE"];
       },
       set(value) {
-        this.disableSave = false;
         this.$store.commit("plg/@SET_TITLE", value);
       }
     }
@@ -107,11 +101,6 @@ export default {
   methods: {
     getImgSrc(language) {
       return require(`@/assets/images/${language}.svg`);
-    },
-
-    updateCode: function(payload) {
-      this.disableSave = false;
-      this.localSource = payload;
     },
 
     save: function() {

@@ -1,6 +1,7 @@
 export default {
   namespaced: true,
   state: {
+    source: "",
     mode: "c_cpp",
     theme: "monokai",
     fontSize: 16,
@@ -8,24 +9,28 @@ export default {
   },
 
   getters: {
+    SOURCE: state => {
+      return state.source;
+    },
     MODE: state => {
       return state.mode;
     },
-
     THEME: state => {
       return state.theme;
     },
-
     FONTSIZE: state => {
       return state.fontSize;
     },
-
     TABS: state => {
       return state.tabs;
     }
   },
 
   mutations: {
+    "@SET_SOURCE": (state, payload) => {
+      state.source = payload;
+    },
+
     "@SET_MODE": (state, payload) => {
       state.mode = payload;
     },

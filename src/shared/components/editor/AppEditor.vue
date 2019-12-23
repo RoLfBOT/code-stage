@@ -5,33 +5,51 @@
 <script>
 import * as Ace from "ace-builds";
 import "ace-builds/webpack-resolver";
+import "ace-builds/src-noconflict/ext-language_tools";
 
 import { mapState } from "vuex";
 
 export default {
   name: "editor",
+  props: {
+    value: String
+  },
+
   data: function() {
     return {
-      editor: undefined
+      editor: null,
+      content: ""
     };
   },
 
   computed: {
-    ...mapState("editor", ["mode", "theme", "fontSize", "tabs"]),
-    ...mapState("plg", ["source"])
+    ...mapState("editor", ["mode", "theme", "fontSize", "tabs"])
+  },
+
+  watch: {
+    value: function(val) {
+      if (this.content !== val) {
+        this.editor.session.setValue(val, 1);
+        this.content = val;
+      }
+    }
   },
 
   mounted() {
+    Ace.require("ace/ext/language_tools");
     this.editor = Ace.edit("editor", {
       mode: "ace/mode/" + this.mode,
       theme: "ace/theme/" + this.theme,
       fontSize: this.fontSize,
-      showPrintMargin: false
+      showPrintMargin: false,
+      enableBasicAutocompletion: true,
+      enableLiveAutocompletion: true
     });
 
     this.editor.on("input", () => {
       if (!this.editor.session.getUndoManager().isClean()) {
-        this.$emit("code-change", this.editor.getValue());
+        this.$emit("input", this.editor.getValue());
+        this.content = this.editor.getValue();
       }
     });
 
@@ -48,11 +66,6 @@ export default {
           break;
         case "editor/@SET_TABS":
           this.editor.session.setTabSize(this.tabs);
-          break;
-        case "plg/@SET_SOURCE":
-        case "plg/@RESET":
-          this.editor.setValue(this.source, 1);
-          this.editor.session.getUndoManager().reset();
           break;
       }
     });
