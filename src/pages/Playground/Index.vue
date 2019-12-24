@@ -28,7 +28,7 @@ export default {
           if (state.route.name === "saved") {
             this.$store.dispatch("plg/LoadFromServer");
           } else if (state.route.name === "new") {
-            this.$store.commit("plg/@RESET");
+            this.$store.dispatch("editor/Reset");
           }
           break;
       }

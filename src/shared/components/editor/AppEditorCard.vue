@@ -81,7 +81,6 @@ export default {
     return {
       showSettings: false,
       editTitle: false,
-      localSource: "",
       runningCode: false
     };
   },
@@ -94,6 +93,14 @@ export default {
       },
       set(value) {
         this.$store.commit("plg/@SET_TITLE", value);
+      }
+    },
+    localSource: {
+      get() {
+        return this.$store.getters["editor/SOURCE"];
+      },
+      set(value) {
+        this.$store.commit("editor/@SET_SOURCE", value);
       }
     }
   },
