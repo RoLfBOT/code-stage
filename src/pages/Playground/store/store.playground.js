@@ -9,7 +9,8 @@ export default {
     error: null,
     savedList: null,
     output: "",
-    stdin: ""
+    stdin: "",
+    deleteError: undefined
   },
   mutations: {
     "@SET_CODEID": (state, payload) => {
@@ -27,8 +28,14 @@ export default {
     "@SET_ERROR": (state, payload) => {
       state.error = payload;
     },
+    "@SET_DELETE_ERROR": (state, payload) => {
+      state.deleteError = payload;
+    },
     "@SET_SAVEDLIST": (state, payload) => {
       state.savedList = payload;
+    },
+    "@DELETE_CODE": (state, payload) => {
+      state.savedList.splice(payload, 1);
     },
     "@RESET": state => {
       state.codeId = "";
@@ -114,6 +121,23 @@ export default {
         commit("@SET_ERROR", {
           error: true,
           message: "Oops. Something went wrong. Please try again!"
+        });
+      }
+    },
+    DeleteCode: async ({ commit }, payload) => {
+      const codeId = payload.codeId;
+
+      try {
+        let { data } = await api.delete(`/plg/delete/${codeId}`);
+        const { error } = data;
+        commit("@SET_DELETE_ERROR", error);
+        if (!error.error) {
+          commit("@DELETE_CODE", payload.index);
+        }
+      } catch (err) {
+        commit("@SET_DELETE_ERROR", {
+          error: true,
+          message: err.message
         });
       }
     },

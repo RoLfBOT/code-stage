@@ -1,5 +1,5 @@
 <template>
-  <div class="masonry-item">
+  <div class="column is-full">
     <div class="box">
       <article class="media">
         <div class="media-left">
@@ -27,7 +27,10 @@
                 </span>
               </router-link>
               <div class="level-item">
-                <span class="icon is-small has-text-danger">
+                <span
+                  class="icon is-small has-text-danger"
+                  @click="$emit('delete-item', index)"
+                >
                   <i class="fa fa-trash-o"></i>
                 </span>
               </div>
@@ -42,7 +45,8 @@
 <script>
 export default {
   props: {
-    savedItem: Object
+    savedItem: Object,
+    index: Number
   },
   methods: {
     getImgSrc(language) {
@@ -53,13 +57,6 @@ export default {
 </script>
 
 <style scoped>
-.masonry-item {
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #66d8cd;
-  -webkit-column-break-inside: avoid;
-}
-
 .box {
   color: rgba(255, 255, 255, 0.87);
   background-color: #1e1e1e;
