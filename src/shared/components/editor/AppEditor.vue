@@ -46,6 +46,11 @@ export default {
       enableLiveAutocompletion: true
     });
 
+    if (this.value) {
+      this.editor.setValue(this.value, 1);
+      this.content = this.value;
+    }
+
     this.editor.on("input", () => {
       if (!this.editor.session.getUndoManager().isClean()) {
         this.$emit("input", this.editor.getValue());

@@ -112,7 +112,7 @@ export default {
 
     save: function() {
       if (this.localSource) {
-        this.$store.commit("plg/@SET_SOURCE", this.localSource);
+        this.$store.commit("editor/@SET_SOURCE", this.localSource);
       }
       this.$store.dispatch("plg/SaveToServer").then(() => {
         this.$router.push({
@@ -124,7 +124,7 @@ export default {
 
     run: function() {
       if (this.localSource) {
-        this.$store.commit("plg/@SET_SOURCE", this.localSource);
+        this.$store.commit("editor/@SET_SOURCE", this.localSource);
       }
       this.runningCode = true;
       this.$store.dispatch("plg/RunCode").then(() => {

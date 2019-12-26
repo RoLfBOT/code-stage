@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="columns">
-      <div class="column is-fullwidth">
+      <div class="column is-full">
         <v-editor-card></v-editor-card>
       </div>
     </div>
