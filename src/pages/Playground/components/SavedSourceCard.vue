@@ -29,7 +29,9 @@
               <div class="level-item">
                 <span
                   class="icon is-small has-text-danger"
-                  @click="$emit('delete-item', index)"
+                  @click="
+                    $emit('delete-item', { index, codeId: savedItem.codeId })
+                  "
                 >
                   <i class="fa fa-trash-o"></i>
                 </span>
