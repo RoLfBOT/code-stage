@@ -127,7 +127,7 @@ export default {
         this.$store.commit("editor/@SET_SOURCE", this.localSource);
       }
       this.runningCode = true;
-      this.$store.dispatch("plg/RunCode").then(() => {
+      this.$store.dispatch("editor/RunCode").then(() => {
         this.runningCode = false;
       });
     },

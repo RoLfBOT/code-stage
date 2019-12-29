@@ -36,10 +36,10 @@ export default {
   computed: {
     stdin: {
       get() {
-        return this.$store.getters["plg/STDIN"];
+        return this.$store.getters["editor/STDIN"];
       },
       set(value) {
-        this.$store.commit("plg/@SET_STDIN", value);
+        this.$store.commit("editor/@SET_STDIN", value);
       }
     }
   }

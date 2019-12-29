@@ -8,8 +8,6 @@ export default {
     title: "Untitled",
     error: null,
     savedList: null,
-    output: "",
-    stdin: "",
     deleteError: undefined
   },
   mutations: {
@@ -18,12 +16,6 @@ export default {
     },
     "@SET_TITLE": (state, payload) => {
       state.title = payload;
-    },
-    "@SET_OUTPUT": (state, payload) => {
-      state.output = payload;
-    },
-    "@SET_STDIN": (state, payload) => {
-      state.stdin = payload;
     },
     "@SET_ERROR": (state, payload) => {
       state.error = payload;
@@ -50,9 +42,6 @@ export default {
     },
     TITLE: state => {
       return state.title;
-    },
-    STDIN: state => {
-      return state.stdin;
     }
   },
   actions: {
@@ -136,30 +125,6 @@ export default {
         }
       } catch (err) {
         commit("@SET_DELETE_ERROR", {
-          error: true,
-          message: err.message
-        });
-      }
-    },
-    RunCode: async ({ state, commit, rootGetters }) => {
-      const program = {
-        source: base64.encode(rootGetters["editor/SOURCE"]),
-        stdin: state.stdin,
-        language: rootGetters["editor/MODE"]
-      };
-
-      try {
-        let { data } = await api.post("/plg/run", program);
-        const { error } = data;
-        const { output, statusCode } = data.results;
-        if (!error.error) {
-          statusCode === 200
-            ? commit("@SET_OUTPUT", output)
-            : commit("@SET_OUTPUT", data.results.error);
-          commit("@SET_ERROR", error);
-        }
-      } catch (err) {
-        commit("@SET_ERROR", {
           error: true,
           message: err.message
         });

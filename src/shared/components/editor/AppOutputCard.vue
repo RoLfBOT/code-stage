@@ -40,11 +40,11 @@ export default {
   name: "output-card",
   mixins: [copyHandlers],
   computed: {
-    ...mapState("plg", ["output"])
+    ...mapState("editor", ["output"])
   },
   methods: {
     clearOutput: function() {
-      this.$store.commit("plg/@SET_OUTPUT", "");
+      this.$store.commit("editor/@SET_OUTPUT", "");
     }
   }
 };
