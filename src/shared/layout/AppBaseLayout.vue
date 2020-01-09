@@ -2,6 +2,9 @@
   <div class="app-content">
     <v-navbar class="navbar-bg-dark">
       <template v-slot:navbar-end-item>
+        <router-link class="navbar-item" to="/playground/all">
+          Playground
+        </router-link>
         <v-user-dropdown></v-user-dropdown>
       </template>
     </v-navbar>

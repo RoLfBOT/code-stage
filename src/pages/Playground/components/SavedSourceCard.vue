@@ -17,24 +17,29 @@
             <p>Language: {{ savedItem.language }}</p>
           </div>
           <nav class="level is-mobile">
-            <div class="level-left">
-              <router-link
-                :to="{ name: 'saved', params: { id: savedItem.codeId } }"
-                class="level-item"
-              >
-                <span class="icon is-small has-text-info">
-                  <i class="fa fa-pencil"></i>
-                </span>
-              </router-link>
+            <div class="level-left"></div>
+            <div class="level-right">
               <div class="level-item">
-                <span
-                  class="icon is-small has-text-danger"
+                <router-link
+                  :to="{ name: 'saved', params: { id: savedItem.codeId } }"
+                  class="button is-primary is-rounded"
+                >
+                  <span class="icon is-small">
+                    <i class="fa fa-pencil"></i> </span
+                  >&nbsp;Edit
+                </router-link>
+              </div>
+              <div class="level-item">
+                <button
+                  class="button is-danger is-rounded"
                   @click="
                     $emit('delete-item', { index, codeId: savedItem.codeId })
                   "
                 >
-                  <i class="fa fa-trash-o"></i>
-                </span>
+                  <span class="icon is-small">
+                    <i class="fa fa-trash-o"></i> </span
+                  >&nbsp;Delete
+                </button>
               </div>
             </div>
           </nav>

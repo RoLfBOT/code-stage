@@ -148,7 +148,7 @@ export default {
     },
     login: function() {
       this.$store
-        .dispatch("user/LOGIN", this.formData)
+        .dispatch("user/Login", this.formData)
         .then(() => {
           this.$router.push({ name: "all" });
         })

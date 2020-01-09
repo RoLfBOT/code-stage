@@ -4,7 +4,7 @@ const PlaygroundRoutes = [
   {
     path: "/playground",
     redirect: "/playground/new",
-    component: () => import("../Index"),
+    component: () => import("../Playground"),
     children: [
       {
         path: "new",

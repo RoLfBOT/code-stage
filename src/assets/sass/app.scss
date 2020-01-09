@@ -14,7 +14,9 @@ $family-sans-serif: 'Fira Code';
 
 $navbar-background-color: #151515;
 $navbar-burger-color: #FFF;
+$navbar-item-color: $primary;
 $navbar-item-hover-color: rgba(255, 255, 255, 0.87);
+$navbar-item-hover-background-color: transparent;
 
 $menu-item-color: rgba(255, 255, 255, 0.87);
 $menu-item-hover-color: rgba(255, 255, 255, 0.87);

@@ -6,18 +6,22 @@ export default {
     user: null,
     token: "",
     isLoggedIn: false,
-    error: null
+    loginError: null,
+    registerError: null
   },
 
   getters: {
-    AUTHSTATUS: state => {
+    AUTH_STATUS: state => {
       return state.isLoggedIn;
     },
     NAME: state => {
       return state.user ? state.user.name : "";
     },
-    ERROR: state => {
-      return state.error;
+    LOGIN_ERROR: state => {
+      return state.loginError;
+    },
+    REGISTER_ERROR: state => {
+      return state.registerError;
     }
   },
 
@@ -30,8 +34,11 @@ export default {
       state.isLoggedIn = true;
       setToken(api, state.token);
     },
-    "@SET_ERROR": (state, payload) => {
-      state.error = payload;
+    "@SET_LOGIN_ERROR": (state, payload) => {
+      state.loginError = payload;
+    },
+    "@SET_REGISTER_ERROR": (state, payload) => {
+      state.registerError = payload;
     },
     "@LOGOUT": state => {
       state.user = null;
@@ -41,7 +48,7 @@ export default {
   },
 
   actions: {
-    REGISTER: async ({ commit }, payload) => {
+    Register: async ({ commit }, payload) => {
       try {
         let { data } = await api.post("/auth/register", payload);
         const { error } = data;
@@ -50,16 +57,16 @@ export default {
           commit("@SET_TOKEN", token);
           commit("@SET_USER", user);
         } else {
-          commit("@SET_ERROR", error);
+          commit("@SET_REGISTER_ERROR", error);
         }
       } catch (error) {
-        commit("@SET_ERROR", {
+        commit("@SET_REGISTER_ERROR", {
           error: true,
           message: "Oops. Something went wrong. Please try again!"
         });
       }
     },
-    LOGIN: async ({ commit }, payload) => {
+    Login: async ({ commit }, payload) => {
       try {
         let { data } = await api.post("/auth/login", payload);
         const { error } = data;
@@ -68,10 +75,10 @@ export default {
           commit("@SET_TOKEN", token);
           commit("@SET_USER", user);
         } else {
-          commit("@SET_ERROR", error);
+          commit("@SET_LOGIN_ERROR", error);
         }
       } catch (error) {
-        commit("@SET_ERROR", {
+        commit("@SET_LOGIN_ERROR", {
           error: true,
           message: "Oops. Something went wrong. Please try again!"
         });

@@ -1,7 +1,7 @@
 import store from "@/store";
 
 const guard = function(to, from, next) {
-  if (store.getters["user/AUTHSTATUS"]) {
+  if (store.getters["user/AUTH_STATUS"]) {
     next();
   } else {
     next("/login");
@@ -9,7 +9,7 @@ const guard = function(to, from, next) {
 };
 
 const redirect = function(to, from, next) {
-  if (!store.getters["user/AUTHSTATUS"]) {
+  if (!store.getters["user/AUTH_STATUS"]) {
     next();
   } else {
     next("/playground");

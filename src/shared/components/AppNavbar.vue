@@ -24,18 +24,12 @@
 
       <div class="navbar-menu" :class="{ 'is-active': showComponent }">
         <div class="navbar-end">
-          <div class="navbar-item">
-            <router-link to="/premium" class="button is-rounded"
-              >Premium</router-link
-            >
-          </div>
-          <div class="navbar-item">
-            <slot name="navbar-end-item">
-              <router-link to="/login" class="button is-rounded"
-                >Log In</router-link
-              >
-            </slot>
-          </div>
+          <router-link to="/premium" class="navbar-item">Premium</router-link>
+          <slot name="navbar-end-item">
+            <!-- <div class="navbar-item"> -->
+            <router-link to="/login" class="navbar-item">Log In</router-link>
+            <!-- </div> -->
+          </slot>
         </div>
       </div>
     </div>
@@ -51,19 +45,6 @@ export default {
 </script>
 
 <style scoped>
-.button {
-  background-color: transparent;
-  color: #66d8cd;
-  border-color: transparent;
-}
-
-.button:hover,
-.button.is-hovered {
-  background-color: #66d8cd;
-  color: #000;
-  border-color: transparent;
-}
-
 a:hover {
   color: #66d8cd;
 }
