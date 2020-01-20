@@ -163,9 +163,7 @@ export default {
       this.errors = this.$v.formData.$anyError;
 
       if (!this.formEmpty && !this.errors) {
-        this.$store.dispatch("user/Register", this.formData).then(() => {
-          this.$router.push("/playground");
-        });
+        this.$emit("register", this.formData);
       }
     }
   }

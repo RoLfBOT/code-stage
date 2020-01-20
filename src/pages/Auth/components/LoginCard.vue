@@ -151,14 +151,7 @@ export default {
       }
     },
     login: function() {
-      this.$store
-        .dispatch("user/Login", this.formData)
-        .then(() => {
-          this.$router.push({ name: "all" });
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.$emit("login", this.formData);
     }
   }
 };
