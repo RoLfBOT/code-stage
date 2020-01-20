@@ -1,127 +1,125 @@
 <template>
-  <transition name="card" mode="out-in">
-    <div class="column is-4 is-offset-4">
-      <div class="card">
-        <div class="card-content">
-          <p class="title has-text-centered is-size-1">Sign Up</p>
-          <form @submit.prevent="register">
-            <div class="field">
-              <p class="control is-expanded">
-                <input
-                  type="text"
-                  class="input"
-                  placeholder="Name"
-                  v-model.lazy="$v.formData.name.$model"
-                />
-              </p>
-              <p class="help is-danger" v-if="!$v.formData.name.required">
-                This field is required
-              </p>
-            </div>
-            <div class="field">
-              <p class="control is-expanded">
-                <input
-                  type="email"
-                  class="input"
-                  placeholder="Email"
-                  v-model.lazy="$v.formData.email.$model"
-                />
-              </p>
-              <p class="help is-danger" v-if="!$v.formData.email.email">
-                Please enter a valid email
-              </p>
-              <p class="help is-danger" v-if="!$v.formData.email.required">
-                This field is required
-              </p>
-            </div>
-            <div class="field">
-              <div class="control is-expanded">
-                <div class="select is-fullwidth">
-                  <select
-                    name="user-role"
-                    id=""
-                    v-model.lazy="$v.formData.role.$model"
-                  >
-                    <option value="" disabled selected>Role</option>
-                    <option value="student">Student</option>
-                    <option value="mentor">Mentor</option>
-                    <option value="organisation">Organisation</option>
-                  </select>
-                </div>
-              </div>
-              <p class="help is-danger" v-if="!$v.formData.role.required">
-                This field is required
-              </p>
-            </div>
-
-            <div class="field">
-              <p class="control is-expanded">
-                <input
-                  type="password"
-                  class="input"
-                  placeholder="Password"
-                  v-model="$v.formData.password.$model"
-                />
-              </p>
-              <p class="help is-danger" v-if="!$v.formData.password.required">
-                This field is required
-              </p>
-              <p class="help is-danger" v-if="!$v.formData.password.minLength">
-                Password must be min.
-                {{ $v.formData.password.$params.minLength.min }} characters
-              </p>
-            </div>
-
-            <div class="field">
-              <p class="control">
-                <button
-                  class="button is-rounded is-fullwidth is-primary"
-                  type="submit"
+  <div class="column is-4 is-offset-4">
+    <div class="card">
+      <div class="card-content">
+        <p class="title has-text-centered is-size-1">Sign Up</p>
+        <form @submit.prevent="register">
+          <div class="field">
+            <p class="control is-expanded">
+              <input
+                type="text"
+                class="input"
+                placeholder="Name"
+                v-model.lazy="$v.formData.name.$model"
+              />
+            </p>
+            <p class="help is-danger" v-if="!$v.formData.name.required">
+              This field is required
+            </p>
+          </div>
+          <div class="field">
+            <p class="control is-expanded">
+              <input
+                type="email"
+                class="input"
+                placeholder="Email"
+                v-model.lazy="$v.formData.email.$model"
+              />
+            </p>
+            <p class="help is-danger" v-if="!$v.formData.email.email">
+              Please enter a valid email
+            </p>
+            <p class="help is-danger" v-if="!$v.formData.email.required">
+              This field is required
+            </p>
+          </div>
+          <div class="field">
+            <div class="control is-expanded">
+              <div class="select is-fullwidth">
+                <select
+                  name="user-role"
+                  id=""
+                  v-model.lazy="$v.formData.role.$model"
                 >
-                  Sign Up
-                </button>
-              </p>
-            </div>
-          </form>
-
-          <div class="divider" data-content="Sign Up With"></div>
-
-          <div class="container">
-            <div class="columns is-mobile">
-              <div class="column is-one-third has-text-right">
-                <span class="icon is-size-1 has-text-white">
-                  <i class="fa fa-google" aria-hidden="true"></i>
-                </span>
-              </div>
-
-              <div class="column is-one-third has-text-centered">
-                <span class="icon is-size-1 has-text-white">
-                  <i class="fa fa-linkedin-square" aria-hidden="true"></i>
-                </span>
-              </div>
-
-              <div class="column is-one-third has-text-left">
-                <span class="icon is-size-1 has-text-white">
-                  <i class="fa fa-github-square" aria-hidden="true"></i>
-                </span>
+                  <option value="" disabled selected>Role</option>
+                  <option value="student">Student</option>
+                  <option value="mentor">Mentor</option>
+                  <option value="organisation">Organisation</option>
+                </select>
               </div>
             </div>
+            <p class="help is-danger" v-if="!$v.formData.role.required">
+              This field is required
+            </p>
           </div>
 
-          <div class="columns">
-            <div class="column has-text-centered">
-              <p class="content footer-line">
-                Already have an account?
-                <router-link :to="{ name: 'login' }"
-                  ><strong>Login</strong></router-link
-                >
-              </p>
+          <div class="field">
+            <p class="control is-expanded">
+              <input
+                type="password"
+                class="input"
+                placeholder="Password"
+                v-model="$v.formData.password.$model"
+              />
+            </p>
+            <p class="help is-danger" v-if="!$v.formData.password.required">
+              This field is required
+            </p>
+            <p class="help is-danger" v-if="!$v.formData.password.minLength">
+              Password must be min.
+              {{ $v.formData.password.$params.minLength.min }} characters
+            </p>
+          </div>
+
+          <div class="field">
+            <p class="control">
+              <button
+                class="button is-rounded is-fullwidth is-primary"
+                type="submit"
+              >
+                Sign Up
+              </button>
+            </p>
+          </div>
+        </form>
+
+        <div class="divider" data-content="Sign Up With"></div>
+
+        <div class="container">
+          <div class="columns is-mobile">
+            <div class="column is-one-third has-text-right">
+              <span class="icon is-size-1 has-text-white">
+                <i class="fa fa-google" aria-hidden="true"></i>
+              </span>
             </div>
+
+            <div class="column is-one-third has-text-centered">
+              <span class="icon is-size-1 has-text-white">
+                <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <div class="column is-one-third has-text-left">
+              <span class="icon is-size-1 has-text-white">
+                <i class="fa fa-github-square" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+            <p class="content footer-line">
+              Already have an account?
+              <router-link :to="{ name: 'login' }"
+                ><strong>Login</strong></router-link
+              >
+            </p>
           </div>
         </div>
       </div>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>

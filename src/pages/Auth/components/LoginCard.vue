@@ -1,120 +1,115 @@
 <template>
-  <transition name="login" mode="out-in">
-    <div class="column is-one-third is-offset-one-third">
-      <div class="card">
-        <div class="card-content">
-          <p class="title has-text-centered is-size-1">Login</p>
+  <div class="column is-one-third is-offset-one-third">
+    <div class="card">
+      <div class="card-content">
+        <p class="title has-text-centered is-size-1">Login</p>
 
-          <form @submit.prevent="login">
-            <div class="field">
-              <div class="control">
-                <input
-                  type="text"
-                  class="input"
-                  placeholder="email"
-                  v-model.lazy="$v.formData.email.$model"
-                />
-              </div>
-              <p class="help is-danger" v-if="!$v.formData.email.required">
-                This is a required field
-              </p>
-              <p class="help is-danger" v-if="!$v.formData.email.email">
-                Please enter a valid email
-              </p>
+        <form @submit.prevent="login">
+          <div class="field">
+            <div class="control">
+              <input
+                type="text"
+                class="input"
+                placeholder="email"
+                v-model.lazy="$v.formData.email.$model"
+              />
             </div>
+            <p class="help is-danger" v-if="!$v.formData.email.required">
+              This is a required field
+            </p>
+            <p class="help is-danger" v-if="!$v.formData.email.email">
+              Please enter a valid email
+            </p>
+          </div>
 
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field is-expanded">
-                  <div class="field has-addons">
-                    <p class="control is-expanded">
-                      <input
-                        class="input"
-                        :type="passwordType"
-                        placeholder="Password"
-                        v-model="$v.formData.password.$model"
-                      />
-                    </p>
-                    <p class="control">
-                      <a
-                        class="button is-primary"
-                        @click="togglePasswordVisibility"
-                      >
-                        <span class="icon">
-                          <i
-                            class="fa"
-                            :class="{
-                              'fa-eye': showPassword,
-                              'fa-eye-slash': !showPassword
-                            }"
-                          ></i>
-                        </span>
-                      </a>
-                    </p>
-                  </div>
-                  <p
-                    class="help is-danger"
-                    v-if="!$v.formData.password.required"
-                  >
-                    This field is required
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <div class="field is-expanded">
+                <div class="field has-addons">
+                  <p class="control is-expanded">
+                    <input
+                      class="input"
+                      :type="passwordType"
+                      placeholder="Password"
+                      v-model="$v.formData.password.$model"
+                    />
+                  </p>
+                  <p class="control">
+                    <a
+                      class="button is-primary"
+                      @click="togglePasswordVisibility"
+                    >
+                      <span class="icon">
+                        <i
+                          class="fa"
+                          :class="{
+                            'fa-eye': showPassword,
+                            'fa-eye-slash': !showPassword
+                          }"
+                        ></i>
+                      </span>
+                    </a>
                   </p>
                 </div>
-              </div>
-            </div>
-
-            <div class="field">
-              <p class="control">
-                <button
-                  class="button is-fullwidth is-rounded is-primary"
-                  type="submit"
-                >
-                  Login
-                </button>
-                <router-link class="help" to="/auth/reset"
-                  >Forgot Password?</router-link
-                >
-              </p>
-            </div>
-          </form>
-
-          <div class="divider" data-content="Connect With"></div>
-
-          <div class="container">
-            <div class="columns is-mobile">
-              <div class="column is-one-third has-text-right">
-                <span class="icon is-size-1 has-text-white">
-                  <i class="fa fa-google" aria-hidden="true"></i>
-                </span>
-              </div>
-
-              <div class="column is-one-third has-text-centered">
-                <span class="icon is-size-1 has-text-white">
-                  <i class="fa fa-linkedin-square" aria-hidden="true"></i>
-                </span>
-              </div>
-
-              <div class="column is-one-third has-text-left">
-                <span class="icon is-size-1 has-text-white">
-                  <i class="fa fa-github-square" aria-hidden="true"></i>
-                </span>
+                <p class="help is-danger" v-if="!$v.formData.password.required">
+                  This field is required
+                </p>
               </div>
             </div>
           </div>
 
-          <div class="columns">
-            <div class="column has-text-centered">
-              <p class="content footer-line">
-                Do not have an account?
-                <router-link :to="{ name: 'register' }"
-                  ><strong>Sign Up</strong></router-link
-                >
-              </p>
+          <div class="field">
+            <p class="control">
+              <button
+                class="button is-fullwidth is-rounded is-primary"
+                type="submit"
+              >
+                Login
+              </button>
+              <router-link class="help" to="/auth/reset"
+                >Forgot Password?</router-link
+              >
+            </p>
+          </div>
+        </form>
+
+        <div class="divider" data-content="Connect With"></div>
+
+        <div class="container">
+          <div class="columns is-mobile">
+            <div class="column is-one-third has-text-right">
+              <span class="icon is-size-1 has-text-white">
+                <i class="fa fa-google" aria-hidden="true"></i>
+              </span>
             </div>
+
+            <div class="column is-one-third has-text-centered">
+              <span class="icon is-size-1 has-text-white">
+                <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <div class="column is-one-third has-text-left">
+              <span class="icon is-size-1 has-text-white">
+                <i class="fa fa-github-square" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column has-text-centered">
+            <p class="content footer-line">
+              Do not have an account?
+              <router-link :to="{ name: 'register' }"
+                ><strong>Sign Up</strong></router-link
+              >
+            </p>
           </div>
         </div>
       </div>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>

@@ -2,7 +2,9 @@
   <v-hero class="is-fullheight">
     <template v-slot:hero-content>
       <div class="columns is-vcentered">
-        <router-view name="authCard"></router-view>
+        <transition name="auth" mode="out-in">
+          <router-view name="authCard"></router-view>
+        </transition>
       </div>
     </template>
   </v-hero>
@@ -18,3 +20,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.auth-enter,
+.auth-leave-to {
+  opacity: 0;
+  transform: rotateY(90deg);
+}
+.auth-enter-active,
+.auth-leave-active {
+  transition: all 0.5s;
+}
+</style>
