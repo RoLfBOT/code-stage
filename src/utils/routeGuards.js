@@ -4,7 +4,7 @@ const guard = function(to, from, next) {
   if (store.getters["user/AUTH_STATUS"]) {
     next();
   } else {
-    next("/login");
+    next("auth/login");
   }
 };
 

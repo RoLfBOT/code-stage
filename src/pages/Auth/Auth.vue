@@ -2,23 +2,19 @@
   <v-hero class="is-fullheight">
     <template v-slot:hero-content>
       <div class="columns is-vcentered">
-        <div class="column is-one-third is-offset-one-third">
-          <LoginCard></LoginCard>
-        </div>
+        <router-view name="authCard"></router-view>
       </div>
     </template>
   </v-hero>
 </template>
 
 <script>
-import AppHero from "@/shared/layout/AppHero.vue";
-import LoginCard from "./components/LoginCard.vue";
+import AppHero from "@/shared/layout/AppHero";
 
 export default {
   name: "login-page",
   components: {
-    "v-hero": AppHero,
-    LoginCard
+    "v-hero": AppHero
   }
 };
 </script>

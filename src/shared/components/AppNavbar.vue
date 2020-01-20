@@ -27,7 +27,9 @@
           <router-link to="/premium" class="navbar-item">Premium</router-link>
           <slot name="navbar-end-item">
             <!-- <div class="navbar-item"> -->
-            <router-link to="/login" class="navbar-item">Log In</router-link>
+            <router-link to="auth/login" class="navbar-item"
+              >Log In</router-link
+            >
             <!-- </div> -->
           </slot>
         </div>
